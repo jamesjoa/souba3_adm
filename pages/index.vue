@@ -79,11 +79,16 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+//import  from 'vuex'
 
 export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  created:function(){
+    //console.log(this.$store.state)
+    this.$store.dispatch('TESTING');
   }
 }
 </script>
