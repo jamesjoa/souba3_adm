@@ -93,18 +93,73 @@ export default {
   data () {
     return {
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: '메인페이지',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-home',
+          title: '사용자홈',
+          to: '/Home'
+        },
+        {
+          icon: 'mdi-domain',
+          title: '업체관리',
+          to: '/Company'
+        },
+        {
+          icon: 'mdi-text-box-search-outline',
+          title: '캠페인관리',
+          to: '/Campaign'
+        },
+        {
+          icon: 'mdi-account-multiple',
+          title: '영업그룹관리',
+          to: '/Group'
+        },
+        {
+          icon: 'mdi-card-account-details',
+          title: '영업자관리',
+          to: '/Marketer'
+        },
+        {
+          icon: 'mdi-account-search',
+          title: '서울오빠 회원관리',
+          to: '/Member'
+        },
+        {
+          icon: 'mdi-cash-usd',
+          title: '환급신청관리',
+          to: '/Refunds'
+        },
+        {
+          icon: 'mdi-table-large',
+          title: '통계관리',
+          to: '/BusinessOwner'
+        },
+        {
+          icon: 'mdi-alert-circle-outline',
+          title: '이슈관리',
+          to: '/Issue'
+        },
+        {
+          icon: 'mdi-calendar-range',
+          title: '일정관리',
+          to: '/Calendar'
+        },
+        {
+          icon: 'mdi-message-processing',
+          title: 'SMS관리',
+          to: '/Sms'
+        },
+        {
+          icon: 'mdi-bulletin-board',
+          title: '게시판',
+          to: '/Board'
         }
       ],
       miniVariant: false,
