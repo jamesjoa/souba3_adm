@@ -83,7 +83,9 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span> {{ /*new Date().getFullYear()*/ }}
+        COPYRIGHT&copy; 서울오빠 - 블로그체험단 All Rights Reserved.
+      </span>
     </v-footer>
   </v-app>
 </template>
@@ -163,9 +165,9 @@ export default {
         }
       ],
       miniVariant: false,
-      right: true,
+      right: true,  
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: '서울오빠'
     }
   }
 }
