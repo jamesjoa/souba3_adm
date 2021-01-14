@@ -13,7 +13,7 @@ export default {
         $list : [],
         $wirte : [],
         $baseURL : {
-          loding :BASEURL+'plugin/seoba3/ajax_loding.php',
+          loading :BASEURL+'plugin/seoba3/ajax_loading.php',
           login :BASEURL+'plugin/seoba3/ajax_login.php',
         },
         $url : {},
@@ -42,19 +42,17 @@ export default {
               state.login = true
             else
               state.login = false
-
-            state.loading = false
         },
-        loding(state,text){
+        loadingStart(state,text){
           if(text)
             state.loadingTxt = text
           else 
             state.loadingTxt = '페이지를 로딩중입니다.'
     
-          state.loding = true
+          state.loading = true
         },
-        lodingEnd(state){
-          state.loding = false
+        loadingEnd(state){
+          state.loading = false
         },
         login(state,TOKEN){
           sessionStorage.setItem("accessToken", TOKEN);
@@ -82,18 +80,19 @@ export default {
           })
         },
         async CHECK_LODDING(sto){
-          await sto.commit("loding",'초기데이터를 불러오는 중입니다.')
+          await sto.commit("loadingStart",'초기데이터를 불러오는 중입니다.')
           await axios({
             method: 'POST',
-            url: sto.state.$baseURL.loding,
+            url: sto.state.$baseURL.loading,
             headers: { 
                 'Authorization': window.sessionStorage.getItem("accessToken"),
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "application/json"
             },
           }).then(res=>{
-            console.log('aixos-data:'+res.data)
+            console.dir(res.data)
             sto.commit("loginTry",res.data)
+            sto.commit("loadingEnd")
           }).catch(err=>{
             console.log(err)
           })

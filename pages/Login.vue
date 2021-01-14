@@ -38,6 +38,9 @@
             >
                 Login
             </v-btn>
+            <v-btn @click="loadingTest">
+                test-loding2
+            </v-btn>
             </v-card-actions>
         </v-card>
     </v-app>
@@ -50,28 +53,22 @@ export default {
     return{
         id : 'admin',
         pw : '1111',
-        login_try : false,
-        info_text : '로그인 후 사용할수 있습니다.',
-        rules: [
-        value => !!value || 'Required.',
-        value => (value && value.length >= 4) || 'Required',
-        ],
     }
     },
     computed:{
     },
     methods:{
-    loginFN : function () {
-        const data = {
-            id : this.id,
-            pw : this.pw,
-        }
-        this.$store.dispatch("LOGIN",data);
+        loginFN : function () {
+            const data = {
+                id : this.id,
+                pw : this.pw,
+            }
+            this.$store.dispatch("LOGIN",data)
         },
+        loadingTest : function(){
+            this.$store.dispatch("CHECK_LODDING")
+        }
     },
-    middleware({ store, redirect }) {
-   
-    }
 }
 </script>
 

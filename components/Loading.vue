@@ -1,51 +1,43 @@
 <template>
   <div v-if="loading" class="loading-page">
-    나는 로딩중이다
-    <div class="loading"></div>
+    <div class="loading-content">
+      <div class="loading"></div>
+    </div>
   </div>
 </template>
 <script>
   export default {
     name:'loading',
-    data: () => ({
-      loading: false,
-    }),
-    methods: {
-      start() {
-        this.loading = true
-        alert('?');
-      },
-      finish() {
-        this.loading = false
-      },
-    },
-    created(){
-      alert('?');
+    props:{
+      text:String,
+      loading:Boolean
     }
   }
 </script>
 <style scoped>
   .loading-page {
+    width: 100%;
+    height: 100%;
     position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    padding: 1rem;
+    background:rgba(0,0,0,0.8);
+    z-index: 999;
+    vertical-align: middle;
+    display: table;
+  }
+  .loading-content{
+    display: table-cell;
+    width:100%;
+    height:100%;
+    vertical-align: middle;
     text-align: center;
-    font-size: 3rem;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
   .loading {
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    border: 4px solid rgba(9, 133, 81, 0.705);
+    border: 4px solid rgb(255, 255, 255);
     border-radius: 50%;
-    border-top-color: #158876;
+    border-top-color: rgba(98,146,255,1);
     animation: spin 1s ease-in-out infinite;
   }
   @keyframes spin {

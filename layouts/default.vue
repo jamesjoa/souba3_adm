@@ -1,7 +1,16 @@
 <template>
   <v-app dark>
     <!--모달-->
+    {{$store.state.loading
+    /*
+    <Loading :Loading="$store.state.loading && false" :text="$store.state.loadingTxt" />
+    
+    */
+    }}
     <!--로딩-->
+
+
+    <!--왼쪽 네비 -->
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -59,14 +68,10 @@
         icon
         @click.stop="rightDrawer = !rightDrawer"
       >
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>mdi-account-circle</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
+
     <v-navigation-drawer
       v-model="rightDrawer"
       :right="right"
@@ -74,16 +79,18 @@
       fixed
     >
       <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
+        <v-list-item @click.native="/*right = !right*/">
           <v-list-item-title v-if="false">Switch drawer (click me)</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <v-main>
+      <v-container>
+        <nuxt />
+      </v-container>
+    </v-main>
+
     <v-footer
       style="position:fixed"
       :absolute="!fixed"
@@ -97,12 +104,16 @@
 </template>
 
 <script>
+import Loading from "@/components/Loading.vue";
 
 export default {
+  components: {
+    Loading
+  },
   data () {
     return {
       clipped: false,
-      drawer: true,
+      drawer: false,
       fixed: false,
       items: [
         {
@@ -177,32 +188,16 @@ export default {
       title: '서울오빠'
     }
   },
-  middleware(context) {
-  //middleware({ app,store, redirect }) {
-      // If the user is not authenticated
-      // console.log(store);
-      
-      console.dir(context.res/*.get('accessToken')*/)
-      //console.log(app.context.app.$cookies.get('token'));
-      /*
-      console.log(store.state.login);
-      console.dir(redirect);
-      console.log(store)
-      if(!store.state.login){
-        store.dispatch('CHECK_LODDING').then(()=>{
-          console.log('?');
-          if (!store.state.login) 
-            return redirect('/Login')
-          else 
-            return ''
-        })
-      }
-      */
-  },
   created(){
-    //this.$nuxt.$loading.start()
+    this.$store.dispatch('CHECK_LODDING')
   },
-  mounted() {
+  middleware({app, store, redirect}) {
+    if(!store.state.login){
+      if (!store.state.login) 
+        return redirect('/Login')
+      else 
+        return ''
+    }
   },
 }
 </script>
