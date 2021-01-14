@@ -1,5 +1,7 @@
 //import Vuex from 'vuex'
 //import Vue from 'vue'
+import axios from 'axios';
+
 //Vue.use(Vuex)
 const BASEURL = 'http://test2.seoulouba.kr/';
 export default {
@@ -16,9 +18,9 @@ export default {
         },
         $url : {},
         modalList : [],
-        loading : true,
         loadingTxt : '페이지를 로딩중입니다.',
-        login : true,
+        loading : true,
+        login : false,
         test : 0,
       },
       getters:{
@@ -40,6 +42,8 @@ export default {
               state.login = true
             else
               state.login = false
+
+            state.loading = false
         },
         loding(state,text){
           if(text)
@@ -88,14 +92,12 @@ export default {
                 "Accept": "application/json"
             },
           }).then(res=>{
+            console.log('aixos-data:'+res.data)
             sto.commit("loginTry",res.data)
-            sto.commit("lodingEnd")
-    
-            
           }).catch(err=>{
             console.log(err)
           })
-        }
+        },
       },
       modules: {
       }

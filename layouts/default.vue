@@ -1,5 +1,7 @@
 <template>
   <v-app dark>
+    <!--모달-->
+    <!--로딩-->
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -39,12 +41,15 @@
       <v-btn
         icon
         @click.stop="clipped = !clipped"
+        v-if="false"
       >
         <v-icon>mdi-application</v-icon>
       </v-btn>
       <v-btn
         icon
         @click.stop="fixed = !fixed"
+        v-if="false"
+
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
@@ -75,11 +80,12 @@
               mdi-repeat
             </v-icon>
           </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+          <v-list-item-title v-if="false">Switch drawer (click me)</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-footer
+      style="position:fixed"
       :absolute="!fixed"
       app
     >
@@ -91,6 +97,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
@@ -169,6 +176,33 @@ export default {
       rightDrawer: false,
       title: '서울오빠'
     }
-  }
+  },
+  middleware(context) {
+  //middleware({ app,store, redirect }) {
+      // If the user is not authenticated
+      // console.log(store);
+      
+      console.dir(context.res/*.get('accessToken')*/)
+      //console.log(app.context.app.$cookies.get('token'));
+      /*
+      console.log(store.state.login);
+      console.dir(redirect);
+      console.log(store)
+      if(!store.state.login){
+        store.dispatch('CHECK_LODDING').then(()=>{
+          console.log('?');
+          if (!store.state.login) 
+            return redirect('/Login')
+          else 
+            return ''
+        })
+      }
+      */
+  },
+  created(){
+    //this.$nuxt.$loading.start()
+  },
+  mounted() {
+  },
 }
 </script>

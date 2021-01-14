@@ -17,7 +17,7 @@ export default {
     }
   },
   created:function(){
-    this.$store.dispatch('TESTING');
+    //this.$store.dispatch('TESTING');
   }
 }
 </script>
