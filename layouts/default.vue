@@ -188,16 +188,28 @@ export default {
       title: '서울오빠'
     }
   },
-  created(){
-    this.$store.dispatch('CHECK_LODDING')
+  mounted(){
+    //alert('?');
   },
-  middleware({app, store, redirect}) {
-    if(!store.state.login){
-      if (!store.state.login) 
-        return redirect('/Login')
-      else 
-        return ''
-    }
-  },
+  middleware({app, store, redirect, route,query,req,res}) {
+    
+    //console.dir(req)
+    //console.dir(req.get('User-Agent'))
+    //console.dir(req.headers)
+    //console.log(query);
+    //console.log(store.state.login);
+    //console.log(app.$nuxt);
+    //console.log(app.$auth.strategies.local.options.JSHToken);
+    //console.log(app.$auth)
+
+    let basePage;  
+    if(route.name !== "Login")
+      basePage = route.name    
+
+    if(!app.$auth.strategies.local.options.JSHToken && route.name !== "Login")
+      return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
+
+
+  }
 }
 </script>

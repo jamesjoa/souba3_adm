@@ -33,13 +33,10 @@
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                color="success"
+                color="blue lighten-1"
                 @click="loginFN"
             >
                 Login
-            </v-btn>
-            <v-btn @click="loadingTest">
-                test-loding2
             </v-btn>
             </v-card-actions>
         </v-card>
@@ -63,12 +60,29 @@ export default {
                 id : this.id,
                 pw : this.pw,
             }
-            this.$store.dispatch("LOGIN",data)
-        },
-        loadingTest : function(){
-            this.$store.dispatch("CHECK_LODDING")
+            this.$store.dispatch("LOGIN",data).then(() =>{
+                //this.$store.$router.go('/')
+            })
         }
     },
+    created(){
+        console.log('?')
+        this.$store.dispatch('CHECK_LODDING').then(() =>{
+            console.log(this.$store.state.login)
+            if(this.$store.state.login){
+                if(this.$store.state.query.basePage){
+                    //this.$store.$router.go('/')
+                }else{
+                    //this.$store.$router.go('/')
+                }
+                    //this.$store.$router.go(`/${this.$store.state.query.basePage}`);
+            }
+        //console.dir(this.$store.$router.go(-1))   
+
+        
+        })
+  },
+
 }
 </script>
 

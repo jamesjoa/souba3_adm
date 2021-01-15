@@ -1,8 +1,3 @@
-//import Vuex from 'vuex'
-//import Vue from 'vue'
-import axios from 'axios';
-
-//Vue.use(Vuex)
 const BASEURL = 'http://test2.seoulouba.kr/';
 export default {
     state: {
@@ -21,15 +16,12 @@ export default {
         loadingTxt : '페이지를 로딩중입니다.',
         loading : true,
         login : false,
-        test : 0,
+        query : {}
       },
       getters:{
      
       },
       mutations: {
-        testConsole(state){
-            state.test++;
-        },
         addModalList(state, data) {
           state.modalList.push(data)
         },
@@ -57,6 +49,16 @@ export default {
         login(state,TOKEN){
           sessionStorage.setItem("accessToken", TOKEN);
           state.login = true
+        },
+        querySet(state){
+          const url = document.location.href;
+          let qs = url.substring(url.indexOf('?') + 1).split('&')
+          const result = []
+          for(let i = 0;i < qs.length; i++){
+              qs[i] = qs[i].split('=')
+              result[qs[i][0]] = decodeURIComponent(qs[i][1])
+          }
+          state.query = result
         }
       },
       actions: {
@@ -65,13 +67,14 @@ export default {
             console.log(sto.state.test)
         },
         async LOGIN(sto,data){
-          axios({
+          this.$axios({
             method: 'POST',
             url: sto.state.$baseURL.login,
             data: data,
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(res=>{
             if(res.data.state){
+              this.$auth.strategies.local.options.JSHToken = res.data.TOKEN
               sto.commit('login',res.data.TOKEN)
               sto.dispatch('CHECK_LODDING')
             }
@@ -80,8 +83,9 @@ export default {
           })
         },
         async CHECK_LODDING(sto){
-          await sto.commit("loadingStart",'초기데이터를 불러오는 중입니다.')
-          await axios({
+          console.log(this);
+          /*
+          await this.$axios({
             method: 'POST',
             url: sto.state.$baseURL.loading,
             headers: { 
@@ -90,13 +94,14 @@ export default {
                 "Accept": "application/json"
             },
           }).then(res=>{
-            console.dir(res.data)
+            sto.commit("querySet")
             sto.commit("loginTry",res.data)
             sto.commit("loadingEnd")
           }).catch(err=>{
             console.log(err)
           })
-        },
+          */
+        }
       },
       modules: {
       }
