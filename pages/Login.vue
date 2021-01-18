@@ -55,28 +55,14 @@ export default {
                 pw : this.pw,
             }
             this.$store.dispatch("LOGIN",data).then(() =>{
-                //this.$store.$router.go('/')
+                if(this.$store.state.login){
+                    alert('로그인이 성공하였으니 메인페이지로 이동합니다')
+                    //this.$store.$router.go('/')
+                }else    
+                    alert('다시입력해!')
             })
         }
     },
-    created(){
-        console.log('?')
-        this.$store.dispatch('CHECK_LODDING').then(() =>{
-            console.log(this.$store.state.login)
-            if(this.$store.state.login){
-                if(this.$store.state.query.basePage){
-                    //this.$store.$router.go('/')
-                }else{
-                    //this.$store.$router.go('/')
-                }
-                    //this.$store.$router.go(`/${this.$store.state.query.basePage}`);
-            }
-        //console.dir(this.$store.$router.go(-1))   
-
-        
-        })
-  },
-
 }
 </script>
 

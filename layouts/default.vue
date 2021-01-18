@@ -205,30 +205,33 @@ export default {
       title: '서울오빠'
     }
   },
-  mounted(){
-    //alert('?');
-  },
-  middleware({app, store, redirect, route,query,req,res}) {
+  middleware({app, store, redirect, route,query,req,res,localStorage}) {
     
-    //console.dir(req)
-    //console.dir(req.get('User-Agent'))
-    //console.log(query);
-    //console.log(store.state.login);
-    //console.log(app.$nuxt);
-    //console.log(app.$auth.strategies.local.options.JSHToken);
-    //console.log(app.$auth)
+    const cookie = req.headers.cookie.split(';')
+    let Token = ''
+    for(let i = 0; i < cookie.length;i++){
+      let Arr = cookie[i].split('=')
+      if(Arr[0].replace(" ","") == 'accessToken'){
+        Token = Arr[1]
+      }
+    }
 
-    //console.dir(req.headers)
-    console.dir(app.context.$auth.$storage);
 
     let basePage;  
     if(route.name !== "Login")
       basePage = route.name    
 
-    if(!app.$auth.strategies.local.options.JSHToken && route.name !== "Login")
+    if(Token == '' && route.name !== "Login")
       return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
+    else if (route.name == "Login" && Token){
+      if(basePage)
+        return redirect(`/${basePage}`)
+      else 
+        return redirect(`/`)
+    }
 
-
-  }
+  },
+  mounted(){
+  },
 }
 </script>

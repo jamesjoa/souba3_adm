@@ -50,7 +50,7 @@ export default {
           state.loading = false
         },
         login(state,TOKEN){
-          sessionStorage.setItem("accessToken", TOKEN);
+          document.cookie = "accessToken="+TOKEN;
           state.login = true
         },
         querySet(state){
@@ -67,7 +67,7 @@ export default {
       actions: {
         async TESTING(sto){
             await sto.commit('testConsole');
-            console.log(sto.state.test)
+            //console.log(sto.state.test)
         },
         async LOGIN(sto,data){
           this.$axios({
@@ -85,10 +85,19 @@ export default {
             console.log(err)
           })
         },
+        async SERVER_LODING(sto){
+          //console.log(this.$auth.options.localStorage);
+          console.dir(this);
+        },
         async CHECK_LODDING(sto){
-          if(typeof window == 'undefined')
-            console.log('server'/*cookieparser*/)
+          if(typeof window == 'undefined'){
+            //console.log('server'/*cookieparser*/)
+          }
           else{
+            //console.log(this.$auth.strategies.local.options.JSHToken)
+            //console.log(this);
+            //this.$auth.strategy.token.set({'AssessToken':window.sessionStorage.getItem("accessToken")})
+
             await this.$axios({
               method: 'POST',
               url: sto.state.$baseURL.loading,

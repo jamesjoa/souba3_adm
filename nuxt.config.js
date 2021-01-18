@@ -5,6 +5,9 @@ export default {
   server: {
     port: 3000, // default: 3000
   },
+
+  mode: 'universal',
+
   head: {
     titleTemplate: '',
     title: '서울오빠 관리자',
@@ -40,6 +43,9 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    ['nuxt-vuex-localstorage',{
+      JSHToken : ''
+    }]
   ],
 
   //axios
