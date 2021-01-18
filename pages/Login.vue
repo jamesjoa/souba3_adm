@@ -2,12 +2,9 @@
     <v-app>
         <v-card
             class="overflow-hidden"
-            color="wirte lighten-1"
-            dark
         >
             <v-toolbar
             flat
-            color="wirte"
             >
             <v-icon>mdi-account</v-icon>
             <v-toolbar-title class="font-weight-light">
@@ -17,12 +14,10 @@
             </v-toolbar>
             <v-card-text>
             <v-text-field
-                color="white"
                 label="ID"
                 v-model="id"
             ></v-text-field>
             <v-text-field
-                color="white"
                 item-text="name"
                 label="Password"
                 type="password"
@@ -33,7 +28,6 @@
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                color="blue lighten-1"
                 @click="loginFN"
             >
                 Login

@@ -15,6 +15,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      v-if="$store.state.login"
       fixed
       app
     >
@@ -40,10 +41,14 @@
       fixed
       app
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon 
+        @click.stop="drawer = !drawer"
+        v-if="$store.state.login"
+       />
       <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
+        v-if="$store.state.login"
       >
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
@@ -63,10 +68,22 @@
         <v-icon>mdi-minus</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
+      
       <v-spacer />
+
+       <v-btn
+        icon
+        @click.stop="$vuetify.theme.dark = $vuetify.theme.dark ? false : true"
+      >
+        <v-icon v-if="$vuetify.theme.dark">mdi-brightness-6</v-icon>
+        <v-icon v-if="!$vuetify.theme.dark">mdi-brightness-4</v-icon>
+      </v-btn>
+
+
       <v-btn
         icon
         @click.stop="rightDrawer = !rightDrawer"
+        v-if="$store.state.login"
       >
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
@@ -195,12 +212,14 @@ export default {
     
     //console.dir(req)
     //console.dir(req.get('User-Agent'))
-    //console.dir(req.headers)
     //console.log(query);
     //console.log(store.state.login);
     //console.log(app.$nuxt);
     //console.log(app.$auth.strategies.local.options.JSHToken);
     //console.log(app.$auth)
+
+    //console.dir(req.headers)
+    console.dir(app.context.$auth.$storage);
 
     let basePage;  
     if(route.name !== "Login")

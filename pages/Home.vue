@@ -1,16 +1,27 @@
 <template>
   <div class="home">
-    사용자홈
-    {{test}}
+    
   </div>
 </template>
+
+<style>
+</style>
 
 <script>
 // @ is an alias to /src
 
 export default {
   name: 'Home',
-  components: {
+  data:()=>{
+    return {
+      tableData01 : [
+        [
+         '켐페인명',
+         '2020-12-12',
+         '2' 
+        ],
+      ]
+    }
   },
   computed:{
     test : function(){

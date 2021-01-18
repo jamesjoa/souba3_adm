@@ -1,4 +1,7 @@
+//const cookieparser = process.server ? require('cookieparser') : undefined
 const BASEURL = 'http://test2.seoulouba.kr/';
+
+
 export default {
     state: {
         $g5 :{},
@@ -83,24 +86,25 @@ export default {
           })
         },
         async CHECK_LODDING(sto){
-          console.log(this);
-          /*
-          await this.$axios({
-            method: 'POST',
-            url: sto.state.$baseURL.loading,
-            headers: { 
-                'Authorization': window.sessionStorage.getItem("accessToken"),
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Accept": "application/json"
-            },
-          }).then(res=>{
-            sto.commit("querySet")
-            sto.commit("loginTry",res.data)
-            sto.commit("loadingEnd")
-          }).catch(err=>{
-            console.log(err)
-          })
-          */
+          if(typeof window == 'undefined')
+            console.log('server'/*cookieparser*/)
+          else{
+            await this.$axios({
+              method: 'POST',
+              url: sto.state.$baseURL.loading,
+              headers: { 
+                  'Authorization': window.sessionStorage.getItem("accessToken"),
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  "Accept": "application/json"
+              },
+            }).then(res=>{
+              sto.commit("querySet")
+              sto.commit("loginTry",res.data)
+              sto.commit("loadingEnd")
+            }).catch(err=>{
+              console.log(err)
+            })
+          }
         }
       },
       modules: {
