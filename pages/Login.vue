@@ -27,11 +27,22 @@
             <v-divider></v-divider>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-                @click="loginFN"
-            >
-                Login
-            </v-btn>
+            <v-card-text>
+                <v-alert
+                    dense
+                    outlined
+                    type="error"
+                    v-if="err"
+                >
+                    <strong>정보가 맞지 않습니다.</strong> ID 와 Password를 <strong>다시 확인하여</strong> 접속해주세요
+                </v-alert>
+
+                <v-btn
+                    @click="loginFN"
+                >
+                    Login
+                </v-btn>
+            </v-card-text>
             </v-card-actions>
         </v-card>
     </v-app>
@@ -44,23 +55,25 @@ export default {
     return{
         id : 'admin',
         pw : '1111',
+        err : false
     }
     },
     computed:{
     },
     methods:{
-        loginFN : function () {
+         loginFN : async function () {
             const data = {
                 id : this.id,
                 pw : this.pw,
             }
-            this.$store.dispatch("LOGIN",data).then(() =>{
-                if(this.$store.state.login){
-                    alert('로그인이 성공하였으니 메인페이지로 이동합니다')
-                    //this.$store.$router.go('/')
-                }else    
-                    alert('다시입력해!')
-            })
+            await this.$store.dispatch("LOGIN",data)
+            if(this.$store.state.login){
+                if(this.$store.state.query.basePage)
+                    this.$store.$router.go(`/${this.$store.state.query.basePage}`)
+                else
+                    this.$store.$router.go('/')
+            }else 
+                this.err = true
         }
     },
 }

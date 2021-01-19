@@ -1,14 +1,8 @@
 <template>
   <v-app dark>
     <!--모달-->
-    {{$store.state.loading
-    /*
-    <Loading :Loading="$store.state.loading && false" :text="$store.state.loadingTxt" />
-    
-    */
-    }}
     <!--로딩-->
-
+    <Loading :Loading="$store.state.loading" :text="$store.state.loadingTxt" />
 
     <!--왼쪽 네비 -->
     <v-navigation-drawer
@@ -115,6 +109,7 @@
     >
       <span> {{ /*new Date().getFullYear()*/ }}
         COPYRIGHT&copy; 서울오빠 - 블로그체험단 All Rights Reserved.
+        {{$store.state.query.basePage}}
       </span>
     </v-footer>
   </v-app>
@@ -206,32 +201,56 @@ export default {
     }
   },
   middleware({app, store, redirect, route,query,req,res,localStorage}) {
-    
-    const cookie = req.headers.cookie.split(';')
-    let Token = ''
-    for(let i = 0; i < cookie.length;i++){
-      let Arr = cookie[i].split('=')
-      if(Arr[0].replace(" ","") == 'accessToken'){
-        Token = Arr[1]
+    if(typeof window == 'undefined'){
+      const cookie = req.headers.cookie.split(';')
+      let Token = ''
+      for(let i = 0; i < cookie.length;i++){
+        let Arr = cookie[i].split('=')
+        if(Arr[0].replace(" ","") == 'accessToken'){
+          Token = Arr[1]
+        }
       }
+
+
+      let basePage;  
+      if(route.name !== "Login")
+        basePage = route.name    
+
+      if(Token == '' && route.name !== "Login")
+        return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
+      else if (Token){
+        store.state.login = true
+        store.state.loginToken = Token
+        if(route.name == "Login"){
+          if(basePage)
+            return redirect(`/${basePage}`)
+          else 
+            return redirect(`/`)
+        }
+      }
+    }else{
+      console.log(route)
+      const cookie = document.cookie.split(';')
+      let Token = ''
+      for(let i = 0; i < cookie.length;i++){
+        let Arr = cookie[i].split('=')
+        if(Arr[0].replace(" ","") == 'accessToken'){
+          Token = Arr[1]
+        }
+      }
+      if(route.name !== "Login"){
+        if(Token == ''){
+          return redirect(`/Login`)
+        }else if(Token !== store.state.loginToken ){
+          document.cookie = "accessToken="
+          return redirect(`/Login`)
+        }
+      }
+
     }
-
-
-    let basePage;  
-    if(route.name !== "Login")
-      basePage = route.name    
-
-    if(Token == '' && route.name !== "Login")
-      return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
-    else if (route.name == "Login" && Token){
-      if(basePage)
-        return redirect(`/${basePage}`)
-      else 
-        return redirect(`/`)
-    }
-
   },
   mounted(){
+    this.$store.dispatch('CHECK_LODDING')
   },
 }
 </script>

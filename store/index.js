@@ -17,8 +17,9 @@ export default {
         $url : {},
         modalList : [],
         loadingTxt : '페이지를 로딩중입니다.',
-        loading : true,
+        loading : false,
         login : false,
+        loginToken : '',
         query : {}
       },
       getters:{
@@ -44,13 +45,15 @@ export default {
           else 
             state.loadingTxt = '페이지를 로딩중입니다.'
     
+          alert(state.loading)
           state.loading = true
         },
         loadingEnd(state){
           state.loading = false
         },
         login(state,TOKEN){
-          document.cookie = "accessToken="+TOKEN;
+          document.cookie = "accessToken="+TOKEN
+          state.loginToken = TOKEN
           state.login = true
         },
         querySet(state){
@@ -67,17 +70,15 @@ export default {
       actions: {
         async TESTING(sto){
             await sto.commit('testConsole');
-            //console.log(sto.state.test)
         },
         async LOGIN(sto,data){
-          this.$axios({
+          await this.$axios({
             method: 'POST',
             url: sto.state.$baseURL.login,
             data: data,
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(res=>{
             if(res.data.state){
-              this.$auth.strategies.local.options.JSHToken = res.data.TOKEN
               sto.commit('login',res.data.TOKEN)
               sto.dispatch('CHECK_LODDING')
             }
@@ -86,23 +87,17 @@ export default {
           })
         },
         async SERVER_LODING(sto){
-          //console.log(this.$auth.options.localStorage);
           console.dir(this);
         },
         async CHECK_LODDING(sto){
           if(typeof window == 'undefined'){
-            //console.log('server'/*cookieparser*/)
           }
           else{
-            //console.log(this.$auth.strategies.local.options.JSHToken)
-            //console.log(this);
-            //this.$auth.strategy.token.set({'AssessToken':window.sessionStorage.getItem("accessToken")})
-
             await this.$axios({
               method: 'POST',
               url: sto.state.$baseURL.loading,
               headers: { 
-                  'Authorization': window.sessionStorage.getItem("accessToken"),
+                  'Authorization': sto.state.loginToken,
                   "Content-Type": "application/x-www-form-urlencoded",
                   "Accept": "application/json"
               },
@@ -110,6 +105,7 @@ export default {
               sto.commit("querySet")
               sto.commit("loginTry",res.data)
               sto.commit("loadingEnd")
+              console.log(res);
             }).catch(err=>{
               console.log(err)
             })
