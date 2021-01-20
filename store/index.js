@@ -3,7 +3,7 @@ const BASEURL = 'http://test2.seoulouba.kr/';
 
 
 export default {
-    state: {
+    state: { // 01.전역으로 변수를 저장하고 부를때
         $g5 :{},
         $config :{},
         $menu : {},
@@ -20,12 +20,16 @@ export default {
         loading : false,
         login : false,
         loginToken : '',
-        query : {}
+        query : {},
+        sayhello : 0
       },
-      getters:{
+      getters:{ //에도 coputed와 같은 친구 감지하고 바꿔줘요!
      
       },
-      mutations: {
+      mutations: { // state값을 변경하고 저장해줘요! //불러올때는 commit !
+        test(state){
+          state.sayhello++
+        },
         addModalList(state, data) {
           state.modalList.push(data)
         },
@@ -67,7 +71,7 @@ export default {
           state.query = result
         }
       },
-      actions: {
+      actions: { //전역함수! 불러올떈 dispatch
         async TESTING(sto){
             await sto.commit('testConsole');
         },

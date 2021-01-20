@@ -112,6 +112,8 @@
         {{$store.state.query.basePage}}
       </span>
     </v-footer>
+
+    
   </v-app>
 </template>
 
@@ -210,7 +212,6 @@ export default {
           Token = Arr[1]
         }
       }
-
 
       let basePage;  
       if(route.name !== "Login")

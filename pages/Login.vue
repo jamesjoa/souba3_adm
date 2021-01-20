@@ -60,6 +60,8 @@ export default {
     },
     computed:{
     },
+    created() {
+    },
     methods:{
          loginFN : async function () {
             const data = {
@@ -67,7 +69,7 @@ export default {
                 pw : this.pw,
             }
             await this.$store.dispatch("LOGIN",data)
-            if(this.$store.state.login){
+            if(this.$store.state.login){ 
                 if(this.$store.state.query.basePage)
                     this.$store.$router.go(`/${this.$store.state.query.basePage}`)
                 else
