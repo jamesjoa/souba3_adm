@@ -13,8 +13,26 @@
         </v-tabs>
         <v-tabs-items  v-model="tab">
             <v-tab-item v-for="(list , index) in items.board_list" :key="index+1"  :value="`tab-${index+1}`" >
-                <v-card flat>
+                        <v-data-table
+                          :headers="items.board_headers"
+                          :items="list"
+                          hide-default-header
+                          hide-default-footer
+                          class="elevation-1"
+                        ></v-data-table>
+            </v-tab-item>
+        </v-tabs-items>
+    </v-card>
+  </div>
+</template>
+
+<script>
+/*
+   <v-card flat>
                     <v-card-text>
+                    </v-card-text>
+                </v-card>
+
                     <v-simple-table>
                         <template v-slot:default>
                             <tbody class="issue_community">
@@ -26,16 +44,8 @@
                             </tbody>
                         </template>
                     </v-simple-table>
-                    </v-card-text>
-                </v-card>
-            </v-tab-item>
-        </v-tabs-items>
-    </v-card>
-  </div>
-</template>
-
-<script>
-
+                    
+                     */
 
 export default {
     props:{
@@ -47,7 +57,9 @@ export default {
     },
     data:()=>{
         return{
-            tab:null
+            tab:null,
+            
+          
         }
     }
 }

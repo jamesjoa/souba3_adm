@@ -70,7 +70,12 @@
             <!-- 진행 중 캠페인 상세 관리 -->
             <v-col class="pa-2" cols="12" md="6" sm="6">
               <v-card class="pa-2">
-                ㅁㄴㄷㅇㄹ
+                <BoardMini 
+                :tabUse="false"  
+                link="https://naver.com" 
+                title="진행중 캠페인 상세 관리"
+                :items="campagin"
+              />
               </v-card>
             </v-col>
             <!-- 최근 3일 진행 완료 -->
@@ -170,6 +175,11 @@ import StateMini from "~/components/StateMini.vue";
             total : 45929,
             link  : '/Board?board=issue&cate=완료'
           },
+        ],
+        board_headers: [
+            { text: '캠페인 명', value: 'name' },
+            { text: '회차', value: 'number' },
+            { text: '날짜', value: 'date' },
         ],
         board_list : [
           [
@@ -280,6 +290,13 @@ import StateMini from "~/components/StateMini.vue";
             link  : '/Board?board=issue&cate=대기'
           }
         ],
+        
+        board_headers: [
+            { text: '캠페인 명', value: 'name' },
+            { text: '회차', value: 'number' },
+            { text: '날짜', value: 'date' },
+        ],
+
         board_list : [
           [
             {
@@ -320,6 +337,83 @@ import StateMini from "~/components/StateMini.vue";
           ],
         ]
       },
+
+      // 공지/커뮤니티 목록
+      campagin : {
+        board_info : [
+          {
+            title : '대기',
+            total : 50,
+            link  : '/Board?board=issue&cate=대기'
+          },
+          
+          {
+            title : '대기',
+            total : 50,
+            link  : '/Board?board=issue&cate=대기'
+          },
+          
+          {
+            title : '대기',
+            total : 50,
+            link  : '/Board?board=issue&cate=대기'
+          },
+          
+          {
+            title : '대기',
+            total : 50,
+            link  : '/Board?board=issue&cate=대기'
+          }
+        ],
+        
+        board_headers: [
+            { text: '캠페인 명', value: 'name' },
+            { text: '분류', value: 'cate' },
+            { text: '회차', value: 'round' },
+            { text: '모집인원', value: 'people' },
+            { text: '종료일자', value: 'date' },
+        ],
+        
+        board_list : [
+          [
+            {
+              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+              cate: '네이버 블로그',
+              round: '1-9/1',
+              people: '12/12',
+              date: '21.01.18',
+            }
+          ],
+          [
+            {
+              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+              cate: '네이버 블로그',
+              round: '1-9/1',
+              people: '12/12',
+              date: '21.01.18',
+            }
+          ],
+          [
+            {
+              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+              cate: '네이버 블로그',
+              round: '1-9/1',
+              people: '12/12',
+              date: '21.01.18',
+            }
+          ],
+          [
+            {
+              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+              cate: '네이버 블로그',
+              round: '1-9/1',
+              people: '12/12',
+              date: '21.01.18',
+            }
+          ],
+        ]
+      },
+
 
       //영업그룹/mkt/md
       select: { state: '--', abbr: '--' },
