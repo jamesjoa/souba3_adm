@@ -27,7 +27,7 @@
 </template>
 
 <script>
-/*
+/*ㅠㅠㅠ
    <v-card flat>
                     <v-card-text>
                     </v-card-text>
