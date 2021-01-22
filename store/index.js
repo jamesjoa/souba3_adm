@@ -1,4 +1,5 @@
 //const cookieparser = process.server ? require('cookieparser') : undefined
+//sote control only dev
 const BASEURL = 'http://test2.seoulouba.kr/';
 
 
