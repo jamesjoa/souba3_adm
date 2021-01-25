@@ -205,6 +205,7 @@ export default {
   middleware: 'authCheck',
   mounted(){
     this.$store.dispatch('CHECK_LODDING')
+    console.log('check new loding update test')
   },
 }
 </script>
