@@ -40,6 +40,7 @@ export default {
             if(data.state)
               state.login = true
             else{
+              
               state.login = false
               document.cookie = "accessToken="
             }
