@@ -36,10 +36,13 @@ export default {
         },
         loginTry(state,data){
             state.$url = data.base_url
+
             if(data.state)
               state.login = true
-            else
+            else{
               state.login = false
+              document.cookie = "accessToken="
+            }
         },
         loadingStart(state,text){
           if(text)

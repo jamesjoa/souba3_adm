@@ -202,54 +202,7 @@ export default {
       title: '서울오빠'
     }
   },
-  middleware({app, store, redirect, route,query,req,res,localStorage}) {
-    if(typeof window == 'undefined'){
-      const cookie = req.headers.cookie.split(';')
-      let Token = ''
-      for(let i = 0; i < cookie.length;i++){
-        let Arr = cookie[i].split('=')
-        if(Arr[0].replace(" ","") == 'accessToken'){
-          Token = Arr[1]
-        }
-      }
-
-      let basePage;  
-      if(route.name !== "Login")
-        basePage = route.name    
-
-      if(Token == '' && route.name !== "Login")
-        return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
-      else if (Token){
-        store.state.login = true
-        store.state.loginToken = Token
-        if(route.name == "Login"){
-          if(basePage)
-            return redirect(`/${basePage}`)
-          else 
-            return redirect(`/`)
-        }
-      }
-    }else{
-      console.log(route)
-      const cookie = document.cookie.split(';')
-      let Token = ''
-      for(let i = 0; i < cookie.length;i++){
-        let Arr = cookie[i].split('=')
-        if(Arr[0].replace(" ","") == 'accessToken'){
-          Token = Arr[1]
-        }
-      }
-      if(route.name !== "Login"){
-        if(Token == ''){
-          return redirect(`/Login`)
-        }else if(Token !== store.state.loginToken ){
-          document.cookie = "accessToken="
-          return redirect(`/Login`)
-        }
-      }
-
-    }
-  },
+  middleware: 'authCheck',
   mounted(){
     this.$store.dispatch('CHECK_LODDING')
   },
