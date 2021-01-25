@@ -211,5 +211,5 @@ export default {
 
 
 <style>
-.container{max-width:1200px!important}
+.container{max-width:100% !important;min-width: 310px !important;}
 </style>

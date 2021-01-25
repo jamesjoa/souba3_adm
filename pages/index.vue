@@ -2,109 +2,142 @@
   <v-app id="index">
     <v-row>
       <v-col cols="12" lg="6" md="12" sm="12">
-          <v-row>
-            <!-- 가입/탈퇴한회원수 -->
-            <v-col classSet="pa-2" cols="12" md="6" sm="6">
-              <StateMini 
-                setClass="pa-2"
-                :item="items[0]"
-              />
-            </v-col>
-            <!-- 대기/완료계약건수 -->
-            <v-col class="pa-2" cols="12" md="6" sm="6">
-              <StateMini 
-                setClass="pa-2"
-                :item="items[1]"
-              />
-            </v-col>
-            <!-- 일정 -->
-            <v-col class="pa-2" cols="12" md="12">
-              <CalendarsMini 
-                :calendars="calendars"
-              />
-            </v-col>
-          </v-row>
+        <v-row>
+          <!-- 가입/탈퇴한회원수 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <StateMini 
+              setClass="pa-2"
+              :item="items[0]"
+            />
+          </v-col>
+          <!-- 대기/완료계약건수 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <StateMini 
+              setClass="pa-2"
+              :item="items[1]"
+            />
+          </v-col>
+          <!-- 일정 -->
+          <v-col class="pa-2" cols="12" md="12">
+            <CalendarsMini 
+              :calendars="calendars"
+            />
+          </v-col>
+        </v-row>
       </v-col>
       <v-col cols="12" lg="6" md="12" sm="12">
-          <v-row>
-            <!-- 이슈 -->
-            <v-col class="pa-2" cols="12" md="6" sm="6">
-              <BoardMini 
-                :tabUse="true"  
-                link="https://naver.com" 
-                title="이슈트레킹"
-                :items="issue"
-              />
-            </v-col>
-            <!-- 공지/커뮤니티 -->
-            <v-col class="pa-2" cols="12" md="6" sm="6">
-              <BoardMini 
-                :tabUse="false"  
-                link="https://naver.com" 
-                title="공지/커뮤니티"
-                :items="community"
-              />
-            </v-col>
-          </v-row>
+        <v-row>
+          <!-- 이슈 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <BoardMini 
+                typeClass="col-type1"
+              :tabUse="true"  
+              link="https://naver.com" 
+              title="이슈트레킹"
+              :items="issue"
+            />
+          </v-col>
+          <!-- 공지/커뮤니티 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <BoardMini 
+              typeClass="col-type1"
+              :tabUse="false"  
+              link="https://naver.com" 
+              title="공지/커뮤니티"
+              :items="community"
+            />
+          </v-col>
+        </v-row>
       </v-col>
       <!-- 영업 그룹 선택 -->
       <v-col cols="12">
-        <v-card class="pa-2">
-          <v-container fluid>
-            <v-row align="center">
-              <v-col cols="1">
+        <v-row>
+          <v-col class="pa-2" cols="12" lg="12" md="6" sm="6">
+            <v-card class="pa-2">
+              <v-row>
                 <v-subheader>영업그룹</v-subheader>
-              </v-col>
-              <v-col cols="1">
-                <v-select v-model="select" :hint="`${select.state}, ${select.abbr}`" :items="sitems"
-                  item-text="state" item-value="abbr" label="Select" persistent-hint
-                  return-object single-line
-                ></v-select>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
+                <v-col cols="1" class="main_select_box">
+                  <v-select v-model="sales.select" :hint="`${sales.select.team_name}`"
+                  :items="sales.items"
+                  item-text="team_name" item-value="abbr" label="Select" persistent-hint
+                  return-object single-line class="main_select_field"
+                  ></v-select>
+                </v-col>
+                <v-subheader>MKT</v-subheader>
+                <v-col cols="1" class="main_select_box">
+                  <v-select v-model="mkt.select" :hint="`${mkt.select.team_mkt}`" :items="mkt.items"
+                  item-text="team_mkt" item-value="abbr" label="Select" persistent-hint
+                  return-object single-line class="main_select_field"
+                  ></v-select>
+                </v-col>
+                <v-subheader>MD</v-subheader>
+                <v-col cols="1" class="main_select_box">
+                  <v-select v-model="md.select" :hint="`${md.select.team_md}`" :items="md.items"
+                  item-text="team_md" item-value="abbr" label="Select" persistent-hint
+                  return-object single-line class="main_select_field"
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-col>
       <v-col cols="12">
         <v-row>
-            <!-- 진행 중 캠페인 상세 관리 -->
-            <v-col class="pa-2" cols="12" md="6" sm="6">
-              <v-card class="pa-2">
-                ㅁㄴㄷㅇㄹ
-              </v-card>
-            </v-col>
-            <!-- 최근 3일 진행 완료 -->
-            <v-col class="pa-2" cols="12" md="6" sm="6">
-              <v-card class="pa-2">
-                ㅁㄴㅇㄻ
-              </v-card>
-            </v-col>
-          </v-row>
+          <!-- 진행 중 캠페인 상세 관리 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <BoardMini 
+              typeClass="col-type2"
+              :tabUse="false"  
+              link="https://naver.com" 
+              title="진행중 캠페인 상세 관리"
+              :items="campagin_ing"
+            />
+          </v-col>
+          <!-- 최근 3일 진행 완료 -->
+          <v-col class="pa-2" cols="12" md="6" sm="6">
+            <BoardMini 
+              typeClass="col-type2"
+              :tabUse="false"  
+              link="https://naver.com" 
+              title="최근 3일 진행 완료"
+              :items="campagin_end"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-app>
 </template>
 
+<style lang="scss">
+.main_select_field{
+  .v-text-field__details{display: none;}
+}
+.main_select_box{
+  .v-input__slot:before{display: none;}
+  .v-input__slot:after{display: none;}
+  .v-input__slot{
+    margin: 0;
+    .v-select__selections{line-height: 23px;}
+    .v-input__append-inner{
+      margin: 0;margin-top: 7px;
+      .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
+    }
+  }
+}
+</style>
+
 <style lang="scss" scoped>
-
-/*
-
-
-     <BoardMini 
-                :tabUse="false"  
-                link="https://naver.com" 
-                title="공지/커뮤니티"
-                :Items="community"
-              />
-
-
-*/
-
-
-
 /* 영업그룹/mkt/md */
-.container--fluid{padding: 0px;}
-.v-text-field__details{display: none;}
+.main_select_box{
+  padding-left: 0;padding-right: 0;margin-right:40px;
+  .v-input{padding: 5px;margin: 0;border: 1px solid #dcdcdc;}
+}
+.v-subheader{
+  font-size: 14px;font-weight: bold;color: #000;height: 72px;
+  display: inline-block; line-height: 72px;
+}  
 </style>
 
 <script>
@@ -112,229 +145,424 @@ import CalendarsMini from "~/components/CalenderMini.vue";
 import BoardMini from "~/components/BoardMini.vue";
 import StateMini from "~/components/StateMini.vue";
 
-  export default {
-    components:{
-      CalendarsMini,
-      BoardMini,
-      StateMini
-    },
-    data:()=>({
-      //가입/탈퇴한회원수 & 대기/완료계약건수
-      items: [
-        {
-          avatar: require('~/assets/business_icon1.png'),
-          title: '어제가입한회원 &mdash; <span class="icon_umb">7</span>명',
-          subtitle: `어제탈퇴한회원 &mdash; <span class="icon_umb">0</span>명`,
-        },
-        {
-          avatar: require('~/assets/business_icon2.png'),
-          title: '계약승인대기 &mdash; <span class="icon_umb contract">20</span>건',
-          subtitle: `계약승인완료 &mdash; <span class="icon_umb contract">18,807</span>건`
-        }
+export default {
+  components:{
+    CalendarsMini,
+    BoardMini,
+    StateMini
+  },
+  data:()=>({
+    //가입/탈퇴한회원수 & 대기/완료계약건수
+    items: [
+      {
+        avatar: require('~/assets/business_icon1.png'),
+        title: '어제가입한회원 &mdash; <span class="icon_umb">7</span>명',
+        subtitle: `어제탈퇴한회원 &mdash; <span class="icon_umb">0</span>명`,
+      },
+      {
+        avatar: require('~/assets/business_icon2.png'),
+        title: '계약승인대기 &mdash; <span class="icon_umb contract">20</span>건',
+        subtitle: `계약승인완료 &mdash; <span class="icon_umb contract">18,807</span>건`
+      }
 
-      ],
+    ],
 
-      //일정
-      week: '2021-01-20 ~ 2021-01-26',
-      calendars: [
-        {
-          date: '20',
-          open: '159',
-          selection: '103',
-          end: '16',
-          completion: '390',
-        },
-      ],
-
-      //이슈트레킹 탭
-      standby_cnt:'50',
-      checking_cnt:'23',
-      completion_cnt:'45,929',
-      tab: null,
-
-      //이슈트레킹 목록
-      issue : {
-        board_info : [
-          {
-            title : '대기',
-            total : 50,
-            link  : '/Board?board=issue&cate=대기'
-          },
-          {
-            title : '확인 중',
-            total : 23,
-            link  : '/Board?board=issue&cate=확인중'
-          },
-          {
-            title : '완료',
-            total : 45929,
-            link  : '/Board?board=issue&cate=완료'
-          },
+    //일정
+    calendars: 
+      {
+        week: '2021-01-20 ~ 2021-01-26',
+        header:[
+          '화',
+          '수',
+          '목',
+          '금',
+          '토',
+          '일',
+          '월',
         ],
-        board_list : [
-          [
-            {
-              name: '[송파] 대기 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            }
-          ],
-          [
-            {
-              name: '[송파] 확인 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            }
-          ],
-          [
-            {
-              name: '[송파] 완료 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            }
-          ],
+        list:[
+          {
+            date:'26',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'27',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'28',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'29',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'30',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'31',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },{
+            date:'1',
+            open: '159',
+            selection: '103',
+            end: '16',
+            completion: '390',
+          },
         ]
       },
 
-      // 공지/커뮤니티 목록
-      community : {
-        board_info : [
+    //이슈트레킹 탭
+    standby_cnt:'50',
+    checking_cnt:'23',
+    completion_cnt:'45,929',
+    tab: null,
+
+    //이슈트레킹 목록
+    issue : {
+      board_info : [
+        {
+          title : '대기',
+          total : 50,
+          link  : '/Board?board=issue&cate=대기'
+        },
+        {
+          title : '확인 중',
+          total : 23,
+          link  : '/Board?board=issue&cate=확인중'
+        },
+        {
+          title : '완료',
+          total : 45929,
+          link  : '/Board?board=issue&cate=완료'
+        },
+      ],
+      board_headers: [
+          { text: '캠페인 명', value: 'name' },
+          { text: '회차', value: 'number' },
+          { text: '날짜', value: 'date' },
+      ],
+      board_list : [
+        [
           {
-            title : '대기',
-            total : 50,
-            link  : '/Board?board=issue&cate=대기'
+            name: '[송파] 대기 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
           }
         ],
-        board_list : [
-          [
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
-              number: '8회차',
-              date: '21.01.18',
-            },
-            {
-              name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
-              number: '6-3회차',
-              date: '21.01.18',
-            }
-          ],
-        ]
-      },
+        [
+          {
+            name: '[송파] 확인 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          }
+        ],
+        [
+          {
+            name: '[송파] 완료 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          }
+        ],
+      ]
+    },
 
-      //영업그룹/mkt/md
-      select: { state: '--', abbr: '--' },
-      sitems: [
-        { state: '--', abbr: '--' },
-        { state: '전체', abbr: '전체' },
-        { state: '1팀', abbr: '1팀' },
-        { state: '2팀', abbr: '2팀' },
-        { state: '3팀', abbr: '3팀' },
-        { state: 'B2B 1팀', abbr: 'B2B 1팀' },
-        { state: 'B2B 2팀', abbr: 'B2B 2팀' },
-        { state: 'NCT', abbr: 'NCT' },
-        { state: 'NCT에이블', abbr: 'NCT에이블' },
-        { state: '에이전시', abbr: '에이전시' }
+    // 공지/커뮤니티 목록
+    community : {
+      board_info : [
+        {
+          title : '대기',
+          total : 50,
+          link  : '/Board?board=issue&cate=대기'
+        }
       ],
-    })
-  }
+      
+      board_headers: [
+          { text: '캠페인 명', value: 'name' },
+          { text: '회차', value: 'number' },
+          { text: '날짜', value: 'date' },
+      ],
+
+      board_list : [
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            number: '6-3회차',
+            date: '21.01.18',
+          },
+          {
+            name: '[배송형] 해커스 한 권으로 끝내는 해커스 TESAT(테셋) 이론 + 적중문제',
+            number: '8회차',
+            date: '21.01.18',
+          }
+        ],
+      ]
+    },
+
+    //영업그룹
+    sales:{
+      select: { team_name: '--'},
+      items: [
+        { team_name: '--'},
+        { team_name: '전체'},
+        { team_name: '1팀'},
+        { team_name: '2팀'},
+        { team_name: '3팀'},
+        { team_name: 'B2B 1팀'},
+        { team_name: 'B2B 2팀'},
+        { team_name: 'NCT'},
+        { team_name: 'NCT에이블'},
+        { team_name: '에이전시'}
+      ]
+    },
+    //mkt
+    mkt:{
+      select: { team_mkt: '--'},
+      items: [
+        { team_mkt: '--'},
+        { team_mkt: '강근영'},
+        { team_mkt: '강도훈'},
+        { team_mkt: '강혜진'},
+        { team_mkt: '김경열'},
+        { team_mkt: '김근후'},
+        { team_mkt: '김도현'},
+        { team_mkt: '김민수'},
+        { team_mkt: '김병수'}
+      ]
+    },
+    //md
+    md:{
+      select: { team_md: '--'},
+      items: [
+        { team_md: '--'},
+        { team_md: '김종현'},
+        { team_md: '김중희'},
+        { team_md: '박가영'},
+        { team_md: '양양'},
+        { team_md: '이한나'},
+        { team_md: '제임스'},
+        { team_md: '주빛나'},
+      ]
+    },
+
+    // 진행중 캠페인 상세관리
+    campagin_ing : {
+      total : 245,
+      board_info : [
+        {
+          title : '모집 중',
+          total : 101,
+          link  : '/Board?board=issue&cate=모집중'
+        },
+        
+        {
+          title : '오늘 선정',
+          total : 26,
+          link  : '/Board?board=issue&cate=오늘선정'
+        },
+        
+        {
+          title : '리뷰등록기간',
+          total : 104,
+          link  : '/Board?board=issue&cate=리뷰등록기간'
+        },
+        
+        {
+          title : '오늘 마감',
+          total : 14,
+          link  : '/Board?board=issue&cate=오늘마감'
+        }
+      ],
+      
+      board_headers: [
+          { text: '캠페인 명', value: 'name' },
+          { text: '분류', value: 'cate' },
+          { text: '회차', value: 'round' },
+          { text: '모집인원', value: 'people' },
+          { text: '종료일자', value: 'date' },
+      ],
+      
+      board_list : [
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ],
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ],
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ],
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ],
+      ]
+    },
+
+    // 최근 3일 진행완료
+    campagin_end : {
+      total : 39,
+      board_info : [
+        {
+          title : '종합리포트 발송',
+          total : 101,
+          link  : '/Board?board=issue&cate=종합리포트발송'
+        },
+        
+        {
+          title : '종합리포트 미발송',
+          total : 26,
+          link  : '/Board?board=issue&cate=종합리포트미발송'
+        }
+      ],
+      
+      board_headers: [
+          { text: '캠페인 명', value: 'name' },
+          { text: '분류', value: 'cate' },
+          { text: '회차', value: 'round' },
+          { text: '모집인원', value: 'people' },
+          { text: '종료일자', value: 'date' },
+      ],
+      
+      board_list : [
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ],
+        [
+          {
+            name: '[송파] 준오헤어 현대시티몰가든파이브점 (원식 디자이너)',
+            cate: '네이버 블로그',
+            round: '1-9/1',
+            people: '12/12',
+            date: '21.01.18',
+          }
+        ]
+      ]
+    },
+  })
+}
 </script>
