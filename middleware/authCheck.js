@@ -13,9 +13,10 @@ export default function ({app, store, redirect, route,query,req,res,localStorage
         if(route.name !== "Login")
           basePage = route.name    
   
-        if(Token == '' && route.name !== "Login")
+        if(Token == '' && route.name !== "Login"){
+          store.state.login = false
           return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
-        else if (Token){
+        }else if (Token){
           store.state.login = true
           store.state.loginToken = Token
           if(route.name == "Login"){
@@ -26,6 +27,7 @@ export default function ({app, store, redirect, route,query,req,res,localStorage
           }
         }
       }else{
+
         const cookie = document.cookie.split(';')
         let Token = ''
         for(let i = 0; i < cookie.length;i++){
@@ -38,9 +40,11 @@ export default function ({app, store, redirect, route,query,req,res,localStorage
           if(Token == ''){
             return redirect(`/Login`)
           }else if(Token !== store.state.loginToken ){
-            document.cookie = "accessToken="
+            store.commit('logout')
             return redirect(`/Login`)
           }
         }
+
+        
       }
   }
