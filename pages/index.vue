@@ -20,6 +20,7 @@
           <!-- 일정 -->
           <v-col class="pa-2" cols="12" md="12">
             <CalendarsMini 
+              link="/Calendar" 
               :calendars="calendars"
             />
           </v-col>
@@ -30,7 +31,7 @@
           <!-- 이슈 -->
           <v-col class="pa-2" cols="12" md="6" sm="6">
             <BoardMini 
-                typeClass="col-type1"
+              typeClass="col-type1"
               :tabUse="true"  
               link="https://naver.com" 
               title="이슈트레킹"
@@ -109,36 +110,6 @@
     </v-row>
   </v-app>
 </template>
-
-<style lang="scss">
-.main_select_field{
-  .v-text-field__details{display: none;}
-}
-.main_select_box{
-  .v-input__slot:before{display: none;}
-  .v-input__slot:after{display: none;}
-  .v-input__slot{
-    margin: 0;
-    .v-select__selections{line-height: 23px;}
-    .v-input__append-inner{
-      margin: 0;margin-top: 7px;
-      .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
-    }
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-/* 영업그룹/mkt/md */
-.main_select_box{
-  padding-left: 0;padding-right: 0;margin-right:40px;
-  .v-input{padding: 5px;margin: 0;border: 1px solid #dcdcdc;}
-}
-.v-subheader{
-  font-size: 14px;font-weight: bold;color: #000;height: 72px;
-  display: inline-block; line-height: 72px;
-}  
-</style>
 
 <script>
 import CalendarsMini from "~/components/CalenderMini.vue";
@@ -226,12 +197,6 @@ export default {
           },
         ]
       },
-
-    //이슈트레킹 탭
-    standby_cnt:'50',
-    checking_cnt:'23',
-    completion_cnt:'45,929',
-    tab: null,
 
     //이슈트레킹 목록
     issue : {
@@ -566,3 +531,33 @@ export default {
   })
 }
 </script>
+
+<style lang="scss">
+.main_select_field{
+  .v-text-field__details{display: none;}
+}
+.main_select_box{
+  .v-input__slot:before{display: none;}
+  .v-input__slot:after{display: none;}
+  .v-input__slot{
+    margin: 0;
+    .v-select__selections{line-height: 23px;}
+    .v-input__append-inner{
+      margin: 0;margin-top: 7px;
+      .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+/* 영업그룹/mkt/md */
+.main_select_box{
+  padding-left: 0;padding-right: 0;margin-right:40px;
+  .v-input{padding: 5px;margin: 0;border: 1px solid #dcdcdc;}
+}
+.v-subheader{
+  font-size: 14px;font-weight: bold;height: 72px;color:unset;
+  display: inline-block; line-height: 72px;
+}  
+</style>

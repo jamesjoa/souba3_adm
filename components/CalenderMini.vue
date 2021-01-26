@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-card class="pa-2">
-      <span class="con_tit">{{ calendars.week }}</span>
-      <a href="" class="the_btn">더보기 ></a>
+      <span class="con_tit">일정 ({{ calendars.week }})</span>
+      <a :href="link" target="_blank" class="the_btn" v-if="link">더보기 ></a>
       <table style="border-top:1px solid #ddd">
         <thead class="calendars">
           <tr>
@@ -13,10 +13,18 @@
           <tr>
             <td v-for="item in calendars.list" :key="item.name">
               <div class="c_date">{{ item.date }}</div>
-              <div class="c_text"><div class="circle"></div>오픈 : {{ item.open }}</div>
-              <div class="c_text"><div class="circle"></div>선정 : {{ item.selection }}</div>
-              <div class="c_text"><div class="circle"></div>마감 : {{ item.end }}</div>
-              <div class="c_text"><div class="circle"></div>완료 : {{ item.completion }}</div>
+              <div class="c_text"><div class="circle"></div>
+                <a href="/campaign" target="_blank">오픈 : {{ item.open }}</a>
+              </div>
+              <div class="c_text"><div class="circle"></div>
+                <a href="/campaign" target="_blank">선정 : {{ item.selection }}</a>
+              </div>
+              <div class="c_text"><div class="circle"></div>
+                <a href="/campaign" target="_blank">마감 : {{ item.end }}</a>
+              </div>
+              <div class="c_text"><div class="circle"></div>
+                <a href="/campaign" target="_blank">완료 : {{ item.completion }}</a>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -28,6 +36,7 @@
 <script>
 export default {
   props:{
+    link     : String,
     calendars: Object
   }
 }
@@ -62,17 +71,20 @@ tbody{
       padding:15px 0 15px 10px;border-right:1px solid #d7d7d7;
       width: 14.28%;display: inline-block;border-bottom: 0px !important;margin:0px !important;
       .c_date{
-        font-size: 14px;font-weight: bold;width: 25px;height: 20px;
-        border-radius: 50%;text-align: center;line-height: 19px;margin-bottom: 10px;
+        font-size: 14px;font-weight: bold;width: 28px;height: 20px;
+        border-radius: 50%;text-align: center;line-height: 20px;margin-bottom: 10px;
       }
-      .c_text{margin-bottom: 5px;}
-      .c_text .circle{
-        background-color: #3872F4;width: 8px;height: 8px;border-radius: 50%;display: inline-block;
-        margin-right: 5px;
+      .c_text{
+        margin-bottom: 5px;
+        .circle{
+          background-color: #3872F4;width: 8px;height: 8px;border-radius: 50%;display: inline-block;
+          margin-right: 5px;
+        }
+        a{text-decoration: none;color: #000;}
       }
     }
     td:first-child{
-      .c_date{background-color: #FEBA2A;color: #000;}
+      .c_date{font-weight: 400;background-color: #1976d2 ;color: #fff;}
     }
     td:last-child{border-right:0px}
   }

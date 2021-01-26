@@ -31,13 +31,13 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.icon_text{color:#000;line-height: 25px;font-size: 14px;}
+.icon_text{line-height: 25px;font-size: 14px;}
 .v-list{
   padding: 0;
   hr{display:none}
   .v-avatar{
     width: 50px !important;height: 50px !important;min-width: 50px !important;
-    margin-top: 0 !important;margin-bottom: 0 !important;
+    margin-top: 0 !important;margin-bottom: 0 !important;border-radius: unset;
     img{border-radius: unset}
   }
 }
