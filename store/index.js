@@ -62,6 +62,11 @@ export default {
           state.loginToken = TOKEN
           state.login = true
         },
+        logout(state){
+          document.cookie = "accessToken="
+          state.loginToken = ''
+          state.login = false
+        },
         querySet(state){
           const url = document.location.href;
           let qs = url.substring(url.indexOf('?') + 1).split('&')
@@ -91,6 +96,10 @@ export default {
           }).catch(err=>{
             console.log(err)
           })
+        },
+        async LOGOUTOUT(sto){
+          this.$router.push({ name: 'Login'})
+          sto.commit('logout')
         },
         async SERVER_LODING(sto){
           console.dir(this);
