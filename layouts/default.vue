@@ -35,6 +35,8 @@
       fixed
       app
     >
+
+    
       <v-app-bar-nav-icon 
         @click.stop="drawer = !drawer"
         v-if="$store.state.login"
@@ -65,14 +67,13 @@
       
       <v-spacer />
 
-       <v-btn
+      <v-btn
         icon
-        @click.stop="$vuetify.theme.dark = $vuetify.theme.dark ? false : true"
+        v-if="$store.state.login"
+        @click="$store.dispatch('LOGOUTOUT')"
       >
-        <v-icon v-if="$vuetify.theme.dark">mdi-brightness-6</v-icon>
-        <v-icon v-if="!$vuetify.theme.dark">mdi-brightness-4</v-icon>
+        <v-icon>mdi-account-arrow-right-outline</v-icon>
       </v-btn>
-
 
       <v-btn
         icon
@@ -120,6 +121,17 @@
 <script>
 import Loading from "@/components/Loading.vue";
 
+/*
+<v-btn
+  icon
+  @click.stop="$vuetify.theme.dark = $vuetify.theme.dark ? false : true"
+>
+  <v-icon v-if="$vuetify.theme.dark">mdi-brightness-6</v-icon>
+  <v-icon v-if="!$vuetify.theme.dark">mdi-brightness-4</v-icon>
+</v-btn>
+
+*/
+
 export default {
   components: {
     Loading
@@ -146,14 +158,14 @@ export default {
           to: '/Company'
         },
         {
+          icon: 'mdi-file-document-edit-outline',
+          title: '계약관리',
+          to: '/Group'
+        },
+        {
           icon: 'mdi-text-box-search-outline',
           title: '캠페인관리',
           to: '/Campaign'
-        },
-        {
-          icon: 'mdi-account-multiple',
-          title: '영업그룹관리',
-          to: '/Group'
         },
         {
           icon: 'mdi-card-account-details',
@@ -189,11 +201,6 @@ export default {
           icon: 'mdi-message-processing',
           title: 'SMS관리',
           to: '/Sms'
-        },
-        {
-          icon: 'mdi-bulletin-board',
-          title: '게시판',
-          to: '/Board'
         }
       ],
       miniVariant: false,
@@ -202,56 +209,10 @@ export default {
       title: '서울오빠'
     }
   },
-  middleware({app, store, redirect, route,query,req,res,localStorage}) {
-    if(typeof window == 'undefined'){
-      const cookie = req.headers.cookie.split(';')
-      let Token = ''
-      for(let i = 0; i < cookie.length;i++){
-        let Arr = cookie[i].split('=')
-        if(Arr[0].replace(" ","") == 'accessToken'){
-          Token = Arr[1]
-        }
-      }
-
-      let basePage;  
-      if(route.name !== "Login")
-        basePage = route.name    
-
-      if(Token == '' && route.name !== "Login")
-        return redirect(`/Login${basePage ? '?basePage='+basePage : ''}`)
-      else if (Token){
-        store.state.login = true
-        store.state.loginToken = Token
-        if(route.name == "Login"){
-          if(basePage)
-            return redirect(`/${basePage}`)
-          else 
-            return redirect(`/`)
-        }
-      }
-    }else{
-      console.log(route)
-      const cookie = document.cookie.split(';')
-      let Token = ''
-      for(let i = 0; i < cookie.length;i++){
-        let Arr = cookie[i].split('=')
-        if(Arr[0].replace(" ","") == 'accessToken'){
-          Token = Arr[1]
-        }
-      }
-      if(route.name !== "Login"){
-        if(Token == ''){
-          return redirect(`/Login`)
-        }else if(Token !== store.state.loginToken ){
-          document.cookie = "accessToken="
-          return redirect(`/Login`)
-        }
-      }
-
-    }
-  },
+  middleware: 'authCheck',
   mounted(){
     this.$store.dispatch('CHECK_LODDING')
+    console.log('check new loding update test')
   },
 }
 </script>

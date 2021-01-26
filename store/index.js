@@ -1,4 +1,5 @@
 //const cookieparser = process.server ? require('cookieparser') : undefined
+//sote control only dev
 const BASEURL = 'http://test2.seoulouba.kr/';
 
 
@@ -35,10 +36,14 @@ export default {
         },
         loginTry(state,data){
             state.$url = data.base_url
+
             if(data.state)
               state.login = true
-            else
+            else{
+              
               state.login = false
+              document.cookie = "accessToken="
+            }
         },
         loadingStart(state,text){
           if(text)
@@ -56,6 +61,11 @@ export default {
           document.cookie = "accessToken="+TOKEN
           state.loginToken = TOKEN
           state.login = true
+        },
+        logout(state){
+          document.cookie = "accessToken="
+          state.loginToken = ''
+          state.login = false
         },
         querySet(state){
           const url = document.location.href;
@@ -86,6 +96,10 @@ export default {
           }).catch(err=>{
             console.log(err)
           })
+        },
+        async LOGOUTOUT(sto){
+          this.$router.push({ name: 'Login'})
+          sto.commit('logout')
         },
         async SERVER_LODING(sto){
           console.dir(this);
