@@ -1,6 +1,11 @@
 <template>
   <v-app dark>
     <!--모달-->
+    <template v-for="(data, index) in $store.state.modalList">
+      <ModalList :type="data" :key="index" :index="index" />
+    </template>
+    
+
     <!--로딩-->
     <Loading :Loading="$store.state.loading" :text="$store.state.loadingTxt" />
 
@@ -14,20 +19,54 @@
       app
     >
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
+          <v-wrap
+              v-for="(item, i) in items"
+              :key="i"
+              class="U-dep1"
+              :class="item.active ? 'U-dep1-on':'' "
+          >
+            <v-list-item
+              :to="item.to"
+              router
+              exact
+            >
+              <v-list-item-action>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title" />
+              </v-list-item-content>
+            </v-list-item>
+            <v-wrap 
+              v-if="item.dep2" 
+              class="U-dep2"
+            >
+              <v-btn 
+                class="btn" 
+                type="button" 
+                :height="48" 
+                :width="48" 
+                :fab="true"
+                :depressed="false"
+                :plain="false"
+                :outlined="false"
+                exact-active-class="on"
+                @click="()=>{item.active = item.active ? false : true }">
+                <v-icon>mdi-menu-down</v-icon>
+              </v-btn>
+              <v-list>
+                <v-list-item
+                  v-for="(item2,j) in item.dep2"
+                  :key="j"
+                  :to="item2.to"
+                >
+                <v-list-item-content>
+                  <v-list-item-title v-text="item2.title" style="font-size:0.9em" />
+                </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-wrap>
+          </v-wrap>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -41,13 +80,6 @@
         @click.stop="drawer = !drawer"
         v-if="$store.state.login"
        />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-        v-if="$store.state.login"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
       <v-btn
         icon
         @click.stop="clipped = !clipped"
@@ -67,6 +99,15 @@
       
       <v-spacer />
 
+      <NuxtLink to="/">
+        <v-btn
+          icon
+          v-if="$store.state.login"
+        >
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </NuxtLink>
+     
       <v-btn
         icon
         v-if="$store.state.login"
@@ -99,6 +140,9 @@
 
     <v-main>
       <v-container>
+        <p>
+          {{$store.router}}
+        </p>
         <nuxt />
       </v-container>
     </v-main>
@@ -108,7 +152,7 @@
       :absolute="!fixed"
       app
     >
-      <span> {{ /*new Date().getFullYear()*/ }}
+      <span>
         COPYRIGHT&copy; 서울오빠 - 블로그체험단 All Rights Reserved.
         {{$store.state.query.basePage}}
       </span>
@@ -119,9 +163,19 @@
 </template>
 
 <script>
-import Loading from "@/components/Loading.vue";
+import Loading  from "@/components/Loading.vue";
+import ModalList from "@/components/ModalList.vue";
 
 /*
+<v-btn
+    icon
+    @click.stop="miniVariant = !miniVariant"
+    v-if="$store.state.login"
+  >
+    <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+</v-btn>
+
+
 <v-btn
   icon
   @click.stop="$vuetify.theme.dark = $vuetify.theme.dark ? false : true"
@@ -134,7 +188,8 @@ import Loading from "@/components/Loading.vue";
 
 export default {
   components: {
-    Loading
+    Loading,
+    ModalList
   },
   data () {
     return {
@@ -144,63 +199,72 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: '메인페이지',
-          to: '/'
+          title: '데쉬보드',
+          to: '/',
+          active: false
         },
         {
           icon: 'mdi-home',
-          title: '사용자홈',
-          to: '/Home'
-        },
-        {
-          icon: 'mdi-domain',
-          title: '업체관리',
-          to: '/Company'
+          title: '마이페이지',
+          to: '/Home',
+          active: false
         },
         {
           icon: 'mdi-file-document-edit-outline',
           title: '계약관리',
-          to: '/Group'
+          to: '/Contract',
+          active: false,
+          dep2:[
+            {title: '계약관리',to: '/Contract'},
+            {title: '업체관리',to: '/Company'},
+          ]
         },
         {
           icon: 'mdi-text-box-search-outline',
           title: '캠페인관리',
-          to: '/Campaign'
-        },
-        {
-          icon: 'mdi-card-account-details',
-          title: '영업자관리',
-          to: '/Marketer'
+          to: '/Campaign',
+          active: false,
+          dep2:[
+            {title: '캠페인관리',to: '/Campaign'},
+            {title: '신청관리',to: '/CampaignApply'},
+            {title: '리뷰관리',to: '/Review'},
+            {title: '이슈관리',to: '/Issue'},
+          ]
         },
         {
           icon: 'mdi-account-search',
           title: '회원관리',
-          to: '/Member'
+          to: '/Member',
+          active: false,
+          dep2:[
+            {title: '회원관리',to: '/Member'},
+            {title: '스페셜회원관리',to: '/VIP'},
+            {title: '블랙회원관리',to: '/BlackList'},
+            {title: '영업자관리',to: '/Marketer'},
+          ]
         },
         {
           icon: 'mdi-cash-usd',
-          title: '환급신청관리',
-          to: '/Refunds'
+          title: '정산관리',
+          to: '/Calculate',
+          active: false,
+          dep2:[
+            {title: '정산관리',to: '/Calculate'},
+            {title: '환급신청관리',to: '/Refunds'},
+            {title: '포인트관리',to: '/Point'},
+          ]
         },
         {
           icon: 'mdi-table-large',
-          title: '통계관리',
-          to: '/BusinessOwner'
-        },
-        {
-          icon: 'mdi-alert-circle-outline',
-          title: '이슈관리',
-          to: '/Issue'
-        },
-        {
-          icon: 'mdi-calendar-range',
-          title: '일정관리',
-          to: '/Calendar'
+          title: '통계',
+          to: '/BusinessOwner',
+          active: false,
         },
         {
           icon: 'mdi-message-processing',
           title: 'SMS관리',
-          to: '/Sms'
+          to: '/Sms',
+          active: false,
         }
       ],
       miniVariant: false,
@@ -225,4 +289,16 @@ export default {
   .v-list{padding: 0;}
 }
 .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined){box-shadow: none;border-bottom: 1px solid #ddd;}
+
+.U-dep1{position:relative;width:100%}
+.U-dep2{
+  .btn{position:absolute;left:185px;top:0;z-index:99;}
+  .v-list{display:none}
+  .theme--light.v-btn.v-btn--has-bg{background: none!important;box-shadow:0 0 0}
+
+}
+.v-list-item--active+.U-dep2 , .U-dep1-on .U-dep2{
+  .v-list{display:block}
+  .btn{transform: rotate(180deg);}
+}
 </style>
