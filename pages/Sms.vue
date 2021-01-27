@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button type="button" @click="openModal('Test')">Test 모달열기</button>
-      
+    <v-btn type="button" @click="openModal('Test')">Test 모달열기</v-btn>
+    <v-btn type="button" @click="openModal('엑셀')">엑셀 모달열기</v-btn>
+    <v-btn type="button" @click="openModal('SMS')">SMS 모달열기</v-btn>
   </div>
 </template>
 

@@ -27,7 +27,6 @@ export default function ({app, store, redirect, route,query,req,res,localStorage
           }
         }
       }else{
-
         const cookie = document.cookie.split(';')
         let Token = ''
         for(let i = 0; i < cookie.length;i++){
