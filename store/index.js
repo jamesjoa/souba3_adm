@@ -16,7 +16,8 @@ export default {
           login :BASEURL+'plugin/seoba3/ajax_login.php',
         },
         $url : {},
-        modalList : [],
+        modalList : [
+        ],
         member : {},
         loadingTxt : '페이지를 로딩중입니다.',
         loading : false,
