@@ -174,7 +174,7 @@ export default {
         },
         {
           icon: 'mdi-account-search',
-          title: '서울오빠 회원관리',
+          title: '회원관리',
           to: '/Member'
         },
         {
@@ -218,6 +218,11 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 .container{max-width:100% !important;min-width: 310px !important;}
+.v-navigation-drawer{
+  border-right: 1px solid #ddd;
+  .v-list{padding: 0;}
+}
+.v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined){box-shadow: none;border-bottom: 1px solid #ddd;}
 </style>
