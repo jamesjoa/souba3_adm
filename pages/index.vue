@@ -58,24 +58,26 @@
               <v-row>
                 <v-subheader>영업그룹</v-subheader>
                 <v-col cols="1" class="main_select_box">
-                  <v-select v-model="sales.select" :hint="`${sales.select.team_name}`"
-                  :items="sales.items"
-                  item-text="team_name" item-value="abbr" label="Select" persistent-hint
-                  return-object single-line class="main_select_field"
+                  <v-select 
+                    v-model="sales.select" :hint="`${sales.select.team_name}`"
+                    :items="sales.items" item-text="team_name" dense outlined
+                    class="main_select_field"
                   ></v-select>
                 </v-col>
                 <v-subheader>MKT</v-subheader>
                 <v-col cols="1" class="main_select_box">
-                  <v-select v-model="mkt.select" :hint="`${mkt.select.team_mkt}`" :items="mkt.items"
-                  item-text="team_mkt" item-value="abbr" label="Select" persistent-hint
-                  return-object single-line class="main_select_field"
+                  <v-select 
+                    v-model="mkt.select" :hint="`${mkt.select.team_mkt}`"
+                    :items="mkt.items" item-text="team_mkt" dense outlined
+                    class="main_select_field"
                   ></v-select>
                 </v-col>
                 <v-subheader>MD</v-subheader>
                 <v-col cols="1" class="main_select_box">
-                  <v-select v-model="md.select" :hint="`${md.select.team_md}`" :items="md.items"
-                  item-text="team_md" item-value="abbr" label="Select" persistent-hint
-                  return-object single-line class="main_select_field"
+                  <v-select 
+                    v-model="md.select" :hint="`${md.select.team_md}`"
+                    :items="md.items" item-text="team_md" dense outlined
+                    class="main_select_field"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -553,8 +555,8 @@ export default {
 <style lang="scss" scoped>
 /* 영업그룹/mkt/md */
 .main_select_box{
-  padding-left: 0;padding-right: 0;margin-right:40px;
-  .v-input{padding: 5px;margin: 0;border: 1px solid #dcdcdc;}
+  padding: 11px 0;margin-right:40px;
+  .v-input{padding: 5px;margin: 0;}
 }
 .v-subheader{
   font-size: 14px;font-weight: bold;height: 72px;color:unset;
