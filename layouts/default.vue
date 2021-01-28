@@ -19,8 +19,8 @@
       app
     >
       <v-list>
-          <v-wrap
-              v-for="(item, i) in items"
+          <div
+              v-for="(item, i) in $store.state.$menu"
               :key="i"
               class="U-dep1"
               :class="item.active ? 'U-dep1-on':'' "
@@ -37,7 +37,7 @@
                 <v-list-item-title v-text="item.title" />
               </v-list-item-content>
             </v-list-item>
-            <v-wrap 
+            <div 
               v-if="item.dep2" 
               class="U-dep2"
             >
@@ -65,8 +65,8 @@
                 </v-list-item-content>
                 </v-list-item>
               </v-list>
-            </v-wrap>
-          </v-wrap>
+            </div>
+          </div>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -196,77 +196,6 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: '데쉬보드',
-          to: '/',
-          active: false
-        },
-        {
-          icon: 'mdi-home',
-          title: '마이페이지',
-          to: '/Home',
-          active: false
-        },
-        {
-          icon: 'mdi-file-document-edit-outline',
-          title: '계약관리',
-          to: '/Contract',
-          active: false,
-          dep2:[
-            {title: '계약관리',to: '/Contract'},
-            {title: '업체관리',to: '/Company'},
-          ]
-        },
-        {
-          icon: 'mdi-text-box-search-outline',
-          title: '캠페인관리',
-          to: '/Campaign',
-          active: false,
-          dep2:[
-            {title: '캠페인관리',to: '/Campaign'},
-            {title: '신청관리',to: '/CampaignApply'},
-            {title: '리뷰관리',to: '/Review'},
-            {title: '이슈관리',to: '/Issue'},
-          ]
-        },
-        {
-          icon: 'mdi-account-search',
-          title: '회원관리',
-          to: '/Member',
-          active: false,
-          dep2:[
-            {title: '회원관리',to: '/Member'},
-            {title: '스페셜회원관리',to: '/VIP'},
-            {title: '블랙회원관리',to: '/BlackList'},
-            {title: '영업자관리',to: '/Marketer'},
-          ]
-        },
-        {
-          icon: 'mdi-cash-usd',
-          title: '정산관리',
-          to: '/Calculate',
-          active: false,
-          dep2:[
-            {title: '정산관리',to: '/Calculate'},
-            {title: '환급신청관리',to: '/Refunds'},
-            {title: '포인트관리',to: '/Point'},
-          ]
-        },
-        {
-          icon: 'mdi-table-large',
-          title: '통계',
-          to: '/BusinessOwner',
-          active: false,
-        },
-        {
-          icon: 'mdi-message-processing',
-          title: 'SMS관리',
-          to: '/Sms',
-          active: false,
-        }
-      ],
       miniVariant: false,
       right: true,  
       rightDrawer: false,

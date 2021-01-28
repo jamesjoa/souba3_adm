@@ -1,7 +1,7 @@
 <template>
-    <v-wrap>
+    <div>
         VIP
-    </v-wrap>
+    </div>
 </template>
 
 <script>

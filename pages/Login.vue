@@ -53,8 +53,8 @@ export default {
     name:"login",
     data:function(){
     return{
-        id : 'admin',
-        pw : '1111',
+        id : 'super',
+        pw : 'super@2016',
         err : false
     }
     },

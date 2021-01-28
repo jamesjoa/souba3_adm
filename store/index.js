@@ -37,7 +37,6 @@ export default {
         },
         loginTry(state,data){
             state.$url = data.base_url
-
             if(data.state)
               state.login = true
             else{
@@ -77,6 +76,9 @@ export default {
               result[qs[i][0]] = decodeURIComponent(qs[i][1])
           }
           state.query = result
+        },
+        setMenu(state,data){
+          state.$menu = data ? data : [] 
         }
       },
       actions: {
@@ -90,6 +92,7 @@ export default {
             data: data,
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(res=>{
+            console.log(res)
             if(res.data.state){
               sto.commit('login',res.data.TOKEN)
               sto.dispatch('CHECK_LODDING')
@@ -120,6 +123,7 @@ export default {
             }).then(res=>{
               sto.commit("querySet")
               sto.commit("loginTry",res.data)
+              sto.commit('setMenu',res.data.menu)
               sto.commit("loadingEnd")
               console.log(res);
             }).catch(err=>{
