@@ -1,5 +1,5 @@
 <template>
-  <v-wrap id="U-modal">
+  <div id="U-modal">
     <button class="close" @click="()=>{$store.commit('deleteModalList',type.type)}" ></button>
     <div class="wrap">
         <div class="content" :style="{width:`${type.width}px`,height:`${type.height}px`}">
@@ -8,7 +8,7 @@
           </h3>
         </div>
      </div>   
-  </v-wrap>
+  </div>
 </template>
 
 <script>

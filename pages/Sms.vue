@@ -1,9 +1,15 @@
 <template>
   <div>
-    <v-btn type="button" @click="openModal('Test')">Test 모달열기</v-btn>
-    <v-btn type="button" @click="openModal('엑셀')">엑셀 모달열기</v-btn>
-    <v-btn type="button" @click="openModal('SMS')">SMS 모달열기</v-btn>
+    <v-list>
+      <v-btn type="button" @click="openModal('Test')">Test 모달열기</v-btn>
+      <v-btn type="button" @click="openModal('엑셀')">엑셀 모달열기</v-btn>
+      <v-btn type="button" @click="openModal('SMS')">SMS 모달열기</v-btn>
+    </v-list>
+    <p>
+      {{$store.state.$menu}}
+    </p>
   </div>
+
 </template>
 
 <script>

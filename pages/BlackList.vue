@@ -1,7 +1,7 @@
 <template>
-    <v-wrap>
+    <div>
         black list
-    </v-wrap>
+    </div>
 </template>
 
 <script>

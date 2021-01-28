@@ -1,7 +1,7 @@
 <template>
-  <v-wrap>
+  <div>
     나는 테스트에용      
-  </v-wrap>
+  </div>
 </template>
 
 <script>
