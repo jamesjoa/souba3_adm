@@ -11,10 +11,7 @@ export default {
         $view :[],
         $list : [],
         $wirte : [],
-        $baseURL : {
-          loading :BASEURL+'plugin/seoba3/ajax_loading.php',
-          login :BASEURL+'plugin/seoba3/ajax_login.php',
-        },
+        $baseURL : `${BASEURL}plugin/seoba3/ajax_loading.php`,
         $url : {},
         modalList : [
         ],
@@ -88,7 +85,7 @@ export default {
         async LOGIN(sto,data){
           await this.$axios({
             method: 'POST',
-            url: sto.state.$baseURL.login,
+            url: sto.state.$url.login,
             data: data,
             headers: { 'Content-Type': 'multipart/form-data' },
           }).then(res=>{
@@ -114,7 +111,7 @@ export default {
           else{
             await this.$axios({
               method: 'POST',
-              url: sto.state.$baseURL.loading,
+              url: sto.state.$baseURL,
               headers: { 
                   'Authorization': sto.state.loginToken,
                   "Content-Type": "application/x-www-form-urlencoded",
@@ -130,6 +127,28 @@ export default {
               console.log(err)
             })
           }
+        },
+        async GET_LATEST(sto,data){
+          const latest = new Object()
+          
+          if(data.mode == 'board'){
+            //data.board 
+            await this.$axios({
+              method: 'POST',
+              url: sto.state.$baseURL,
+              headers: { 
+                  'Authorization': sto.state.loginToken,
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  "Accept": "application/json"
+              },
+            })
+          }else if(data.mode == 'campagin'){
+
+          }else if(data.mode == 'contract'){
+
+          }
+
+          return latest
         }
       },
       modules: {

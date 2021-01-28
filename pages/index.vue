@@ -137,9 +137,8 @@ export default {
         title: '계약승인대기 &mdash; <span class="icon_umb contract">20</span>건',
         subtitle: `계약승인완료 &mdash; <span class="icon_umb contract">18,807</span>건`
       }
-
     ],
-
+    
     //일정
     calendars: 
       {
