@@ -3,6 +3,7 @@
 const BASEURL = 'http://test2.seoulouba.kr/';
 
 
+
 export default {
     state: {
         $g5 :{},
