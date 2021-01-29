@@ -214,7 +214,7 @@ export default {
         }
       ]
     },
-  }),
+  }), 
 }
 </script>
 
