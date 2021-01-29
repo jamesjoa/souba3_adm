@@ -1,8 +1,13 @@
 <template>
-  <v-app ref="testing">
+  <v-app ref="testing" :class="item.opstion.class"> 
     <v-data-table
-        v-model="selected" :headers="item.headers" :items="item.list" :single-select="singleSelect"
-        item-key="name" show-select class="basictable"
+        v-model="selected"
+        :headers="item.headers" 
+        :items="item.list" 
+        :single-select="singleSelect"
+        :sort-by="['ask', 'select', 'point']"
+        item-key="name" 
+        show-select class="basictable"
     >
     </v-data-table>
   </v-app>
@@ -18,6 +23,8 @@ export default {
       singleSelect: false,
       selected: [],
     }
+  },
+  methods:{
   }
 }
 </script>
@@ -32,5 +39,6 @@ export default {
 </style> 
 
 <style lang="scss" scoped>
+
 
 </style>
