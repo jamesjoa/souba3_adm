@@ -8,8 +8,8 @@
           class="member_select"
         ></v-select>
       </v-col>
-      <v-col class="pa-0 pl-2 mr-3 member_search" cols="2">
-        <v-text-field
+      <v-col class="pa-0 pl-2 member_search" cols="2" style="border-right:0px">
+        <v-text-field 
           v-model="search"
           append-icon="mdi-magnify"
           label="검색어"
@@ -18,7 +18,7 @@
         ></v-text-field>
       </v-col>
       <v-btn 
-        class="btn mr-3" type="button" :height="40" :width="40" exact-active-class="on">
+        class="btn mr-3" type="button" :height="40" :width="40">
         상세<v-icon>mdi-menu-down</v-icon>
       </v-btn>
       <v-col class="pa-0 mr-3 stats" cols="1">
@@ -33,6 +33,65 @@
         <div class="tit">어제탈퇴</div>
         <div>{{drop_out}}</div>
       </v-col>
+    </v-row>
+
+    <v-row class="ma-0 pa-5 member_data">
+      <div class="check_tit">가입기간</div>
+      <v-col class="pa-0 px-2" cols="1" sm="1" md="1">
+        <v-menu
+          ref="start_dt" v-model="start_dt" :close-on-content-click="false" :return-value.sync="date"
+          transition="scale-transition" offset-y min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date" readonly v-bind="attrs" v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="start_dt = false"> Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.start_dt.save(date)">OK</v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
+      <div>~</div>
+      <v-col class="pa-0 px-2" cols="1" sm="1" md="1">
+        <v-menu
+          ref="end_dt" v-model="end_dt" :close-on-content-click="false" :return-value.sync="date"
+          transition="scale-transition" offset-y min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date" readonly v-bind="attrs" v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="end_dt = false"> Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.end_dt.save(date)">OK</v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
+    </v-row>
+
+    <v-row class="ma-0 mb-5 pt-3 pb-3" 
+      style="border-top:1px solid #ddd; border-bottom:1px solid #ddd;">
+      <v-btn style="border-right:0px"
+        class="btn" type="button" :height="40" :width="40">
+        <v-icon>mdi-trash-can-outline</v-icon>삭제
+      </v-btn>
+      <v-btn 
+        class="btn mr-3" type="button" :height="40" :width="40">
+        수정
+      </v-btn>
+      <v-btn 
+        class="btn mr-3" type="button" :height="40" :width="40">
+        <v-icon>mdi-dots-horizontal</v-icon>
+      </v-btn>
+      <v-btn style="position: absolute; right: 0;"
+        class="btn" type="button" :height="40">
+        엑셀다운
+      </v-btn>
     </v-row>
     
     <!-- 회원리스트 -->
@@ -76,6 +135,9 @@ export default {
 
     //회원목록
     memver_list : {
+      opstion:{
+        class : 'test999999999'
+      },
       headers: [
           {
             text: '이름',
@@ -91,13 +153,12 @@ export default {
           { text: '신청', value: 'ask' },
           { text: '선정', value: 'select' },
           { text: '이슈율', value: 'percent' },
-          { text: '상태', value: 'state' },
-          { text: '포인트', value: 'point' },
-          { text: '유입경로', value: 'path' },
           { text: '가입일', value: 'in_date' },
           { text: '최근접속', value: 'recent_access' },
           { text: '로그인', value: 'login' },
-          { text: 'SMS', value: 'sns' },
+          { text: '포인트', value: 'point' },
+          { text: '상태', value: 'state' },
+          { text: '보기', value: 'view' ,class: 'wow'}
       ],
       list : [
         {
@@ -107,16 +168,15 @@ export default {
           addr: '01012345678',
           chammel: '블로그(1년)',
           area: '부산/동래구',
-          ask: 0,
+          ask: 5,
           select: 0,
           percent: '1',
-          state: '우수(0)',
-          point: 100,
-          path: '블로그 포스팅',
           in_date: '21.01.27 15:00',
           recent_access: '21.01.28 15:01',
           login: 2,
-          sns: 'SMS',
+          point: 100,
+          state: '우수(0)',
+          view: '보기',
         },
         {
           name: '강감찬',
@@ -126,15 +186,14 @@ export default {
           chammel: '블로그(1년)',
           area: '부산/동래구',
           ask: 0,
-          select: 0,
+          select: 7,
           percent: '1',
-          state: '우수(0)',
-          point: 100,
-          path: '블로그 포스팅',
           in_date: '21.01.27 15:00',
           recent_access: '21.01.28 15:01',
           login: 2,
-          sns: 'SMS',
+          point: 200,
+          state: '우수(0)',
+          view: '보기',
         },
         {
           name: '송감찬',
@@ -146,13 +205,12 @@ export default {
           ask: 0,
           select: 0,
           percent: '1',
-          state: '우수(0)',
-          point: 100,
-          path: '블로그 포스팅',
           in_date: '21.01.27 15:00',
           recent_access: '21.01.28 15:01',
           login: 2,
-          sns: 'SMS',
+          point: 100,
+          state: '우수(0)',
+          view: '보기',
         }
       ]
     },
@@ -183,11 +241,16 @@ export default {
     height: 100%;margin: 0px;padding: 7px !important;border-left: 1px solid #ddd;
   }
 }
+.member_data{
+  .v-text-field__details{display: none;}
+  .v-input__slot{margin: 0;}
+  .v-input__slot:before{display: none;}
+}
+
 </style>
 
 <style lang="scss" scoped>
 .v-input{padding:0px;margin:0px;}
-.v-text-field__details{display: none;}
 .btn{
   background-color: #fff !important;box-shadow:none;border:1px solid rgba(0, 0, 0, 0.2);border-radius: 0;
   .v-icon{color: rgba(0, 0, 0, 0.54);}
@@ -200,4 +263,7 @@ export default {
     line-height: 18px;
   }
 }
+.tit{
+    color: #000; padding-right: 5px;line-height: 18px;
+  }
 </style>
