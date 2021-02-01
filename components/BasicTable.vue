@@ -31,14 +31,36 @@ export default {
 
 <style lang="scss">
 .basictable .v-data-table-header{
-  background: #C4C4C4;
+  background: $bg_color02;
   .text-start{
-      font-size: 13px;font-weight: bold;color: #000 !important;
+      font-weight: bold;color: #000 !important;
+  }
+  .v-input{
+    padding: 0;
+    .v-label{display: none;}
+  }
+  th:first-child .v-icon  {
+    font-size:24px !important;
+    @media screen and (max-width:1080px){
+        font-size:24px !important;
+    }
+    @media screen and (max-width:768px){
+        font-size:23px !important;
+    }
+    @media screen and (max-width:480px){
+        font-size:23px !important;
+    }
+    @media screen and (max-width:400px){
+        font-size:22px !important;
+    }
+    @media screen and (max-width:350px){
+        font-size:22px !important;
+    }
   }
 }
-</style> 
-
-<style lang="scss" scoped>
-
-
+.basictable{
+  .v-data-table__mobile-row{
+    min-height: 35px !important;
+  }
+}
 </style>

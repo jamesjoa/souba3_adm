@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-card class="pa-2">
-      <span class="con_tit">일정 ({{ calendars.week }})</span>
+      <span class="con_tit font-size-lg">일정 ({{ calendars.week }})</span>
       <a :href="link" target="_blank" class="the_btn" v-if="link">더보기 ></a>
       <table style="border-top:1px solid #ddd">
         <thead class="calendars">
@@ -43,11 +43,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.con_tit{font-size: 16px; font-weight: bold;line-height: 40px;}
-.the_btn{
-  text-decoration: none;font-size: 13px;color: #666666;float: right;line-height: 40px; 
-  font-weight: bold;
-}
 table{
   width:100%;display: inline-block;border-top: 4px solid #868686 !important;
   thead{
@@ -77,14 +72,14 @@ tbody{
       .c_text{
         margin-bottom: 5px;
         .circle{
-          background-color: #3872F4;width: 8px;height: 8px;border-radius: 50%;display: inline-block;
+          background-color: $color04;width: 8px;height: 8px;border-radius: 50%;display: inline-block;
           margin-right: 5px;
         }
         a{text-decoration: none;color: #000;}
       }
     }
     td:first-child{
-      .c_date{font-weight: 400;background-color: #1976d2 ;color: #fff;}
+      .c_date{font-weight: bold;background-color: $color07 ;}
     }
     td:last-child{border-right:0px}
   }
