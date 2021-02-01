@@ -1,0 +1,104 @@
+/*
+
+1.componets 에 적용되는 단일 스타일은 .vue에 style에서 수정한다.
+2.공통된 전역변수, 스타일은 assets에 적용한다.
+
+*/
+
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+  }
+
+
+  .bg_gd {
+    background-image: linear-gradient(hotpink, tomato);
+  }
+
+$color01 : #FE8464;
+$fontsizemd  : 12px;
+$fontsizelz  : 15px;
+
+/*
+.ft-cl-ch{color:$color01}
+.ft-sz-ch{font-size:$fontsizemd}
+*/
+
+.ft-cl-ch{color:$color01}
+.ft-sz-ch{font-size:$fontsizemd}
+.ft-sz-ch2{font-size:$fontsizelz}
+.ft-pd-ch{padding: 10px 20px;}
+.ft-pd-ch2{padding: 20px 40px;}
+
+.ft-pk-ch01{
+    @extend .ft-cl-ch;
+    @extend .ft-sz-ch;
+    @extend .ft-pd-ch;
+}
+
+
+.ft-pk-ch02{
+    @extend .ft-cl-ch;
+    @extend .ft-sz-ch2;
+    @extend .ft-pd-ch;
+}
+
+
+.ft-pk-ch02{
+    @extend .ft-cl-ch;
+    @extend .ft-sz-ch;
+    @extend .ft-pd-ch2;
+}
+
+
+/*
+.T_ft_cl_submit{}
+.T_ft_cl_cencle{}
+.T_ft_cl_save{}
+.T_ft_cl_buy{}
+*/
+.T_ft_cl01 {color:#FE8464}
+.T_ft_cl02 {}
+.T_ft_cl03 {}
+.T_ft_cl04 {}
+.T_ft_cl05 {}
+
+
+.T_bg_cl01 {background-color:#FE8464!important}
+
+
+$btn-icon-font-size : 30px;
+
+.T_ft_01 , .T_ft_01 *  {
+    font-size:16px!important;
+
+    @media screen and (max-width:1080px){
+        font-size:30px!important;
+    
+    }
+    
+    @media screen and (max-width:768px){
+        font-size:25px!important;
+    
+    }
+    
+    @media screen and (max-width:480px){
+        font-size:20px!important;
+    
+    }
+
+    @media screen and (max-width:400px){
+        font-size:15px!important;
+    }
+
+    
+    @media screen and (max-width:350px){
+        font-size:10px!important;
+    }
+}
+
+.T_table_ft_01{
+    td{}
+    th{}
+}

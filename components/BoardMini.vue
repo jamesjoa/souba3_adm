@@ -1,7 +1,7 @@
 <template>
   <v-app ref="testing">
     <v-card class="pa-2">
-      <span class="con_tit">{{title}}</span>
+      <span class="con_tit font-size-lg">{{title}}</span>
       <span :style="items.total ?'' : 'display:none'">({{items.total}})</span>
       <a :href="link" class="the_btn" v-if="link">더보기 ></a>
       <v-tabs 
@@ -48,24 +48,41 @@ export default {
 </script>
 
 <style lang="scss">
-.v-application--wrap{
-  min-height: auto !important;
-}
 .main_btab{
-    .v-item-group{height: 49px;}
+  border-top:$border01;
+  .v-item-group{height: 49px;}
 }
 .main_btable{
+  border-top:$border01;
   table{
     display: inline-block;
   }
   tbody{
     display: inline-block;width: 100%;margin: 13px 0;
     tr{
-      display: inline-block;width: 100%;border-bottom: thin solid rgba(0, 0, 0, 0.12);
+      display: inline-block;width: 100%;border-bottom: $border01;
       td{
-        padding:0px !important;padding-right:10px !important;display: inline-block;font-size: 12px;
-        line-height: 49px;border-bottom: 0 !important;height: 45px;text-align: center;
+        padding:0px !important;padding-right:10px !important;display: inline-block;
+        border-bottom: 0 !important;
         text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+        text-align: center;
+        font-size:14px !important;
+        line-height: 49px;height: 45px;
+        @media screen and (max-width:1080px){
+          font-size:14px !important;
+        }
+        @media screen and (max-width:768px){
+          font-size:13px !important;
+        }
+        @media screen and (max-width:480px){
+          font-size:13px !important;
+        }
+        @media screen and (max-width:400px){
+          font-size:12px !important;
+        }
+        @media screen and (max-width:350px){
+          font-size:12px !important;
+        }
       }
       td:first-child{
         line-height: 39px;padding:5px 5px !important;
@@ -86,16 +103,6 @@ export default {
 </style> 
 
 <style lang="scss" scoped>
-.con_tit{font-size: 16px; font-weight: bold;line-height: 40px;}
-.the_btn{
-  text-decoration: none;font-size: 13px;color: #666666;float: right;line-height: 40px; 
-  font-weight: bold;
-}
-.main_btab{
-  border-top:1px solid #ddd;
-}
-.main_btable{
-  border-top:1px solid #ddd;
-  }
-</style>
+.con_tit{line-height: 40px;font-weight: bold;}
+</style> 
 

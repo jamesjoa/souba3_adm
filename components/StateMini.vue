@@ -16,22 +16,38 @@
 
 <script>
 export default {
-    props:{
-      classSet : String,
-      item : Object
-    }
+  props:{
+    classSet : String,
+    item : Object
+  }
 }
 </script>
 
 <style lang="scss">
 .icon_text{
-  .icon_umb{font-weight: bold;font-size: 20px;}
-  .icon_umb.contract{color: #FE8464;}
+  .icon_umb{
+    font-weight: bold;font-size: 22px;
+    @media screen and (max-width:1080px){
+        font-size: 22px;
+    }
+    @media screen and (max-width:768px){
+        font-size: 20px;
+    }
+    @media screen and (max-width:480px){
+        font-size: 20px;
+    }
+    @media screen and (max-width:400px){
+        font-size: 18px;
+    }
+    @media screen and (max-width:350px){
+        font-size: 18px;
+    }
+  }
+  .icon_umb.contract{color: $color05;}
 }
 </style>
 
 <style lang="scss" scoped>
-.icon_text{line-height: 25px;font-size: 14px;}
 .v-list{
   padding: 0;
   hr{display:none}
