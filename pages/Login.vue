@@ -1,29 +1,25 @@
 <template>
-    <v-app>
+    <v-content class="U_login">
         <v-card
-            class="overflow-hidden"
+            class="overflow-hidden U_login_content"
         >
-            <v-toolbar
-            flat
-            >
-            <v-icon>mdi-account</v-icon>
-            <v-toolbar-title class="font-weight-light">
-                로그인
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            </v-toolbar>
+            <div class="title">
+                <v-icon>mdi-account</v-icon>
+            </div>
+
             <v-card-text>
-            <v-text-field
-                label="ID"
-                v-model="id"
-            ></v-text-field>
-            <v-text-field
-                item-text="name"
-                label="Password"
-                type="password"
-                v-model="pw"
-            ></v-text-field>
+                <v-text-field
+                    label="ID"
+                    v-model="id"
+                ></v-text-field>
+                <v-text-field
+                    item-text="name"
+                    label="Password"
+                    type="password"
+                    v-model="pw"
+                ></v-text-field>
             </v-card-text>
+
             <v-divider></v-divider>
             <v-card-actions>
             <v-spacer></v-spacer>
@@ -37,15 +33,16 @@
                     <strong>정보가 맞지 않습니다.</strong> ID 와 Password를 <strong>다시 확인하여</strong> 접속해주세요
                 </v-alert>
 
-                <v-btn
+                <button
                     @click="loginFN"
+                    class="btn01"
                 >
                     Login
-                </v-btn>
+                </button>
             </v-card-text>
             </v-card-actions>
         </v-card>
-    </v-app>
+    </v-content>
 </template>
 
 <script>
@@ -81,5 +78,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
+.U_login{
+    .U_login_content{
+        @extend .bg_gd01;
+        padding:30px;
+        max-width:400px;
+        margin: 0 auto
+    }
+    .v-card__text, .v-card__actions{background:#fff}
+    .title{
+        padding:30px;text-align: center;
+        .v-icon{width:80px;height:80px;border-radius: 50%;background:#fff;font-size:3.5rem}
+    }
+    .btn01{
+        @extend .U_btn01;
+        @extend .U_ft_sz01;
+    }
+}
 </style>
