@@ -70,6 +70,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
+      v-if="$store.state.login"
       :clipped-left="clipped"
       fixed
       app
@@ -78,7 +79,6 @@
     
       <v-app-bar-nav-icon 
         @click.stop="drawer = !drawer"
-        v-if="$store.state.login"
        />
       <v-btn
         icon
@@ -95,14 +95,13 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title"  />
       
       <v-spacer />
 
       <NuxtLink to="/">
         <v-btn
           icon
-          v-if="$store.state.login"
         >
           <v-icon>mdi-home</v-icon>
         </v-btn>
@@ -110,7 +109,6 @@
      
       <v-btn
         icon
-        v-if="$store.state.login"
         @click="$store.dispatch('LOGOUTOUT')"
       >
         <v-icon>mdi-account-arrow-right-outline</v-icon>
@@ -119,7 +117,6 @@
       <v-btn
         icon
         @click.stop="rightDrawer = !rightDrawer"
-        v-if="$store.state.login"
       >
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
@@ -186,6 +183,7 @@ import ModalList from "@/components/ModalList.vue";
 
 */
 
+
 export default {
   components: {
     Loading,
@@ -230,4 +228,6 @@ export default {
   .v-list{display:block}
   .btn{transform: rotate(180deg);}
 }
+
+.U-dep2 .v-list-item__content{padding-left:70px}
 </style>

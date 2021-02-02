@@ -1,104 +1,158 @@
-/*
+/* #1 import */
 
-1.componets 에 적용되는 단일 스타일은 .vue에 style에서 수정한다.
-2.공통된 전역변수, 스타일은 assets에 적용한다.
 
-*/
+/* #2 char */
+$color01 : #ACACAC; 
+$color02 : #666666; 
+$color03 : #6292FF; 
+$color04 : #3872F4;
+$color05 : #FE8464;
+$color06 : #02AB1D; 
+$color07 : #FEBA2A; 
+$color08 : #d4d4d4; 
+
+$breakpoint-mobile-sm: 350px;
+$breakpoint-mobile-md: 400px;
+$breakpoint-mobile-lz: 480px;
+$breakpoint-tablet-vt: 768px; /*758*/
+$breakpoint-tablet-hz: 1024px;
+$breakpoint-desktop: 1024px;
+
+/* #3 maxin */
+
+@mixin m{
+    @media (max-width: #{$breakpoint-tablet - 1px}) {
+      @content;
+    }
+  }
+
+
+@mixin m-sm {
+  @media (max-width: #{$breakpoint-mobile-md - 1px}) {
+    @content;
+  }
+}
+
+
+@mixin m-md {
+    @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+        @content;
+    }
+}
+
+@mixin m-lz {
+    @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+        @content;
+    }
+}
+
+@mixin tab {
+    @media (max-width: #{$breakpoint-tablet - 1px}) {
+        @content;
+    }
+}
+
+@mixin tab-vt {
+  @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+    @content;
+  }
+}
+
+@mixin tab-hz {
+    @media (min-width: #{$breakpoint-tablet-vt}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+      @content;
+    }
+}
+  
+@mixin pc {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+
 
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
-  }
+}
 
-
-  .bg_gd {
-    background-image: linear-gradient(hotpink, tomato);
-  }
-
-$color01 : #FE8464;
-$fontsizemd  : 12px;
-$fontsizelz  : 15px;
-
-/*
-.ft-cl-ch{color:$color01}
-.ft-sz-ch{font-size:$fontsizemd}
-*/
-
-.ft-cl-ch{color:$color01}
-.ft-sz-ch{font-size:$fontsizemd}
-.ft-sz-ch2{font-size:$fontsizelz}
-.ft-pd-ch{padding: 10px 20px;}
-.ft-pd-ch2{padding: 20px 40px;}
-
-.ft-pk-ch01{
-    @extend .ft-cl-ch;
-    @extend .ft-sz-ch;
-    @extend .ft-pd-ch;
+@mixin user-font-maker01($font-size) {
+    @each $size in $font-size {
+        $i: index($font-size, $size);
+        @if ($i==0){
+            font-size:$size;
+        } @else if($i==1){
+            @include tab-hz{
+                font-size:$size;
+            }
+        } @else if($i==2){
+            @include tab-vt{
+                font-size:$size;
+            }
+        } @else if($i==3){
+            @include tab-hz{
+                font-size:$size;
+            }
+        } @else if($i==4){
+            @include m-lz{
+                font-size:$size;
+            }
+        } @else if($i==5){
+            @include m-md{
+                font-size:$size;
+            }
+        } @else if($i==6){
+            @include m-sm{
+                font-size:$size;
+            }
+        }
+    }
 }
 
 
-.ft-pk-ch02{
-    @extend .ft-cl-ch;
-    @extend .ft-sz-ch2;
-    @extend .ft-pd-ch;
-}
-
-
-.ft-pk-ch02{
-    @extend .ft-cl-ch;
-    @extend .ft-sz-ch;
-    @extend .ft-pd-ch2;
-}
-
-
-/*
-.T_ft_cl_submit{}
-.T_ft_cl_cencle{}
-.T_ft_cl_save{}
-.T_ft_cl_buy{}
-*/
-.T_ft_cl01 {color:#FE8464}
-.T_ft_cl02 {}
-.T_ft_cl03 {}
-.T_ft_cl04 {}
-.T_ft_cl05 {}
-
-
-.T_bg_cl01 {background-color:#FE8464!important}
-
-
-$btn-icon-font-size : 30px;
-
-.T_ft_01 , .T_ft_01 *  {
-    font-size:16px!important;
-
+/* #4 common */
+body,html  {
+    @include user-font-maker01([14px,13px]);
+    /*
+    font-size:14px;
     @media screen and (max-width:1080px){
-        font-size:30px!important;
-    
+        font-size:13px;
     }
-    
     @media screen and (max-width:768px){
-        font-size:25px!important;
-    
+        font-size:13px;
     }
-    
     @media screen and (max-width:480px){
-        font-size:20px!important;
-    
+        font-size:12px;
     }
-
     @media screen and (max-width:400px){
-        font-size:15px!important;
+        font-size:12px;
     }
-
-    
     @media screen and (max-width:350px){
-        font-size:10px!important;
+        font-size:11px;
     }
+    */
 }
 
-.T_table_ft_01{
-    td{}
-    th{}
+
+.bg_gd01 {
+    background-image: linear-gradient($color03, $color04);
+}
+
+.U_{
+    &btn{
+        &01{
+            background:#f9f9f9; /*임시 컬러*/
+            width:100%;
+            padding:15px 0;
+            border-radius: 1000px;
+            font-weight: 700;
+            line-height: 1;
+        }
+    }
+
+    &ft_{
+        &sz01{font-size:1.6rem}
+    }
 }

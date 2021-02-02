@@ -1,7 +1,7 @@
 //const cookieparser = process.server ? require('cookieparser') : undefined
 //sote control only dev
+//vuex 
 const BASEURL = 'http://test2.seoulouba.kr/';
-
 
 
 export default {
@@ -31,7 +31,8 @@ export default {
           state.modalList.push(data)
         },
         deleteModalList(state, data) {
-          state.modalList.splice(data, 1)
+          //state.modalList.splice(data, 1)
+          state.modalList.shift()
         },
         loginTry(state,data){
             state.$url = data.base_url

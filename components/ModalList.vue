@@ -1,22 +1,28 @@
 <template>
-  <div id="U-modal">
+  <v-content id="U-modal">
     <button class="close" @click="()=>{$store.commit('deleteModalList',type.type)}" ></button>
     <div class="wrap">
         <div class="content" :style="{width:`${type.width}px`,height:`${type.height}px`}">
-          <h3 style="color:#pink;font-size:30px">
-            {{type}}
-          </h3>
+          <Test v-if="type.type =='Test'"/>
+          {{$store.state.modalList}}
         </div>
      </div>   
-  </div>
+  </v-content>
 </template>
 
 <script>
+import Test from './modal/Test.vue';
+
 export default {
   props: {
     type: Object,
     index: Number,
   },
+  components:{
+    Test
+  }
+
+
 }
 </script>
 
