@@ -56,29 +56,23 @@
           <v-col class="pa-2" cols="12" lg="12" md="12" sm="12">
             <v-card class="pa-2">
               <v-row>
-                <v-subheader class="con_tit font-size-md">영업그룹</v-subheader>
+                <v-subheader class="main_select_tit font-size-md">영업그룹</v-subheader>
                 <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
-                  <v-select 
-                    v-model="sales.select" :hint="`${sales.select.team_name}`"
-                    :items="sales.items" item-text="team_name" dense outlined
-                    class="main_select_field"
-                  ></v-select>
+                  <SelectMini 
+                    :item="sales"
+                  />
                 </v-col>
-                <v-subheader class="con_tit font-size-md">MKT</v-subheader>
+                <v-subheader class="main_select_tit font-size-md">MKT</v-subheader>
                 <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
-                  <v-select 
-                    v-model="mkt.select" :hint="`${mkt.select.team_mkt}`"
-                    :items="mkt.items" item-text="team_mkt" dense outlined
-                    class="main_select_field"
-                  ></v-select>
+                  <SelectMini 
+                    :item="mkt"
+                  />
                 </v-col>
-                <v-subheader class="con_tit font-size-md">MD</v-subheader>
+                <v-subheader class="main_select_tit font-size-md">MD</v-subheader>
                 <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
-                  <v-select 
-                    v-model="md.select" :hint="`${md.select.team_md}`"
-                    :items="md.items" item-text="team_md" dense outlined
-                    class="main_select_field"
-                  ></v-select>
+                  <SelectMini 
+                    :item="md"
+                  />
                 </v-col>
               </v-row>
             </v-card>
@@ -362,47 +356,47 @@ export default {
 
     //영업그룹
     sales:{
-      select: { team_name: '--'},
+      select: { keywords: '--'},
       items: [
-        { team_name: '--'},
-        { team_name: '전체'},
-        { team_name: '1팀'},
-        { team_name: '2팀'},
-        { team_name: '3팀'},
-        { team_name: 'B2B 1팀'},
-        { team_name: 'B2B 2팀'},
-        { team_name: 'NCT'},
-        { team_name: 'NCT에이블'},
-        { team_name: '에이전시'}
+        { keywords: '--'},
+        { keywords: '전체'},
+        { keywords: '1팀'},
+        { keywords: '2팀'},
+        { keywords: '3팀'},
+        { keywords: 'B2B 1팀'},
+        { keywords: 'B2B 2팀'},
+        { keywords: 'NCT'},
+        { keywords: 'NCT에이블'},
+        { keywords: '에이전시'}
       ]
     },
     //mkt
     mkt:{
-      select: { team_mkt: '--'},
+      select: { keywords: '--'},
       items: [
-        { team_mkt: '--'},
-        { team_mkt: '강근영'},
-        { team_mkt: '강도훈'},
-        { team_mkt: '강혜진'},
-        { team_mkt: '김경열'},
-        { team_mkt: '김근후'},
-        { team_mkt: '김도현'},
-        { team_mkt: '김민수'},
-        { team_mkt: '김병수'}
+        { keywords: '--'},
+        { keywords: '강근영'},
+        { keywords: '강도훈'},
+        { keywords: '강혜진'},
+        { keywords: '김경열'},
+        { keywords: '김근후'},
+        { keywords: '김도현'},
+        { keywords: '김민수'},
+        { keywords: '김병수'}
       ]
     },
     //md
     md:{
-      select: { team_md: '--'},
+      select: { keywords: '--'},
       items: [
-        { team_md: '--'},
-        { team_md: '김종현'},
-        { team_md: '김중희'},
-        { team_md: '박가영'},
-        { team_md: '양양'},
-        { team_md: '이한나'},
-        { team_md: '제임스'},
-        { team_md: '주빛나'},
+        { keywords: '--'},
+        { keywords: '김종현'},
+        { keywords: '김중희'},
+        { keywords: '박가영'},
+        { keywords: '양양'},
+        { keywords: '이한나'},
+        { keywords: '제임스'},
+        { keywords: '주빛나'},
       ]
     },
 
@@ -533,29 +527,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.main_select_field{
-  .v-text-field__details{display: none;}
-}
-.main_select_box{
-  .v-input__slot:before{display: none;}
-  .v-input__slot:after{display: none;}
-  .v-input__slot{
-    margin: 0;
-    .v-select__selections{line-height: 23px;}
-    .v-input__append-inner{
-      margin: 0;margin-top: 7px;
-      .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
-    }
-    fieldset{color: $color08 !important;border-radius: $border_radius01;}
-  }
-}
-</style>
-
 <style lang="scss" scoped>
 /* 영업그룹/mkt/md */
-.con_tit{height: 72px;color:unset;
-  display: inline-block; line-height: 72px; font-weight: bold; width: 100px;
+.main_select_tit{height: 62px;color:unset;
+  display: inline-block; line-height: 62px; font-weight: bold; width: 100px;
 }  
 .main_select_box{
   padding: 11px 0;margin-right:40px;

@@ -50,7 +50,7 @@ export default {
 <style lang="scss">
 .main_btab{
   border-top:$border01;
-  .v-item-group{height: 49px;}
+  .v-item-group{height: 46px;}
 }
 .main_btable{
   border-top:$border01;
@@ -67,22 +67,8 @@ export default {
         text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
         text-align: center;
         font-size:14px !important;
-        line-height: 49px;height: 45px;
-        @media screen and (max-width:1080px){
-          font-size:14px !important;
-        }
-        @media screen and (max-width:768px){
-          font-size:13px !important;
-        }
-        @media screen and (max-width:480px){
-          font-size:13px !important;
-        }
-        @media screen and (max-width:400px){
-          font-size:12px !important;
-        }
-        @media screen and (max-width:350px){
-          font-size:12px !important;
-        }
+        line-height: 49px;height: 45px !important;
+        @extend .font-size-td;
       }
       td:first-child{
         line-height: 39px;padding:5px 5px !important;

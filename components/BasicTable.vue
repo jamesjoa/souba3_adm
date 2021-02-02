@@ -41,21 +41,7 @@ export default {
   }
   th:first-child .v-icon  {
     font-size:24px !important;
-    @media screen and (max-width:1080px){
-        font-size:24px !important;
-    }
-    @media screen and (max-width:768px){
-        font-size:23px !important;
-    }
-    @media screen and (max-width:480px){
-        font-size:23px !important;
-    }
-    @media screen and (max-width:400px){
-        font-size:22px !important;
-    }
-    @media screen and (max-width:350px){
-        font-size:22px !important;
-    }
+    @extend .th-chkbtn;
   }
 }
 .basictable{

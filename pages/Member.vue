@@ -2,11 +2,9 @@
   <v-app>
     <v-row class="ma-0 mb-5">
       <v-col class="pa-0 mr-3" cols="4" lg="1" md="2" sm="4">
-        <v-select 
-          v-model="search_key.select" :hint="`${search_key.select.keywords}`"
-          :items="search_key.items" item-text="keywords" dense outlined
-          class="member_select"
-        ></v-select>
+        <SelectMini 
+          :item="search_key"
+        />
       </v-col>
       <v-col class="pa-0 pl-2 member_search" cols="4" lg="2" md="3" sm="6" style="border-right:0px">
         <v-text-field 
@@ -39,13 +37,11 @@
     <v-row class="ma-0 px-3 py-3">
       <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
         <v-row>
-          <v-col cols="12" lg="1" md="2" sm="12" class="pa-0 detail_select_tit">가입기간</v-col>
+          <v-col cols="12" lg="2" md="2" sm="12" class="pa-0 detail_select_tit">가입기간</v-col>
           <v-col class="pa-0 mr-1" cols="4" lg="2" md="3" sm="3">
-            <v-select 
-              v-model="join_key.select" :hint="`${join_key.select.date_type}`"
-              :items="join_key.items" item-text="date_type" dense outlined
-              class="member_select"
-            ></v-select>
+            <SelectMini 
+              :item="join_key"
+            />
           </v-col>
           <v-col class="pa-0 mr-1 select_date" cols="3" lg="3" md="3" sm="3">
             <v-menu
@@ -86,13 +82,11 @@
       </v-col>
       <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
         <v-row>
-          <v-col cols="12" lg="1" md="2" sm="12" class="pa-0 detail_select_tit">포인트</v-col>
+          <v-col cols="12" lg="2" md="2" sm="12" class="pa-0 detail_select_tit">포인트</v-col>
           <v-col class="pa-0 mr-1" cols="4" lg="2" md="3" sm="3">
-            <v-select 
-              v-model="point_key.select" :hint="`${point_key.select.point_type}`"
-              :items="point_key.items" item-text="point_type" dense outlined
-              class="member_select"
-            ></v-select>
+            <SelectMini 
+              :item="point_key"
+            />
           </v-col>
           <v-col class="pa-0 mr-1" cols="3" lg="3" md="3" sm="3">
             <v-text-field
@@ -103,13 +97,33 @@
             ></v-text-field>
           </v-col>
           <div class="detail_select_tit">-</div>
-          <v-col class="pa-0 px-2 ml-1" cols="3" lg="3" md="3" sm="3">
+          <v-col class="pa-0 ml-1" cols="3" lg="3" md="3" sm="3">
             <v-text-field
               label="최대포인트"
               single-line
               outlined
               class="text_info"
             ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-row class="ma-0 px-3 py-3">
+      <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
+        <v-row>
+          <v-col cols="12" lg="2" md="2" sm="12" class="pa-0 detail_select_tit">성별</v-col>
+          <v-col class="pa-0 mr-1" cols="12" lg="9" md="9" sm="12">
+            <RadioMini 
+              :items="gender"
+            />
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
+        <v-row>
+          <v-col cols="12" lg="2" md="2" sm="12" class="pa-0 detail_select_tit">보유채널</v-col>
+          <v-col class="pa-0 mr-1" cols="12" lg="9" md="9" sm="12">
+            
           </v-col>
         </v-row>
       </v-col>
@@ -177,27 +191,27 @@ export default {
 
     //가입기간
     join_key:{
-      select: { date_type: '어제'},
+      select: { keywords: '어제'},
       items: [
-        { date_type: '어제'},
-        { date_type: '지난주'},
-        { date_type: '최근 10일'},
-        { date_type: '최근 한 달'},
-        { date_type: '지난달'},
+        { keywords: '어제'},
+        { keywords: '지난주'},
+        { keywords: '최근 10일'},
+        { keywords: '최근 한 달'},
+        { keywords: '지난달'},
       ]
     },
 
     //포인트
     point_key:{
-      select: { point_type: '500만이상'},
+      select: { keywords: '500만이상'},
       items: [
-        { point_type: '500만이상'},
-        { point_type: '100~500만'},
-        { point_type: '50~100만'},
-        { point_type: '10~50만'},
-        { point_type: '5~10만'},
-        { point_type: '1~5만'},
-        { point_type: '1만이하'},
+        { keywords: '500만이상'},
+        { keywords: '100~500만'},
+        { keywords: '50~100만'},
+        { keywords: '10~50만'},
+        { keywords: '5~10만'},
+        { keywords: '1~5만'},
+        { keywords: '1만이하'},
       ]
     },
 
@@ -282,22 +296,30 @@ export default {
         }
       ]
     },
+
+    //성별
+    gender : {
+      radio_list : [
+        {
+          label: '전체',
+          value: 'all',
+        },
+        {
+          label: '남',
+          value: 'man',
+        },
+        {
+          label: '여',
+          value: 'woman',
+        }
+      ]
+    },
   }), 
 }
 </script>
 
 <style lang="scss">
-.member_select{
-  .v-input__control .v-input__slot{
-    margin: 0px;
-  }
-  .v-input__control  .v-text-field__details{display: none;}
-  fieldset{color: $color08 !important;border-radius: $border_radius01;}
-  
-  .v-select__slot .v-input__append-inner .primary--text{
-    color:$color08 !important;caret-color: $color08 !important;
-  }
-}
+
 .member_search{
   border: 1px solid rgba(0, 0, 0, 0.2);
   .v-input__slot{
@@ -320,8 +342,10 @@ export default {
 .v-input{padding:0px;margin:0px;}
 .btn{
   background-color: #fff !important;box-shadow:none;border:1px solid $color08;border-radius: 0;
-  .v-icon{color: rgba(0, 0, 0, 0.54);}
-  .btn{transform: rotate(180deg);}
+  .v-icon{
+    color: rgba(0, 0, 0, 0.54);
+    @extend .th-chkbtn;
+  }
 }
 .stats{
   div{display: inline-block;margin-top:11px;font-weight: bold;color:#00ba2e;}

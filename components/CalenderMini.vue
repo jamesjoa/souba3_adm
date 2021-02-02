@@ -43,6 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.con_tit{line-height: 40px;font-weight: bold;}
 table{
   width:100%;display: inline-block;border-top: 4px solid #868686 !important;
   thead{

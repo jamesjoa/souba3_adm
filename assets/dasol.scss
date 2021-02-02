@@ -90,7 +90,7 @@ $border_radius02 : 3px;
         font-size:11px;
     }
 }
-thead tr th i  {
+.font-size-td  {
     font-size:14px !important;
     @media screen and (max-width:1080px){
         font-size:14px !important;
@@ -108,11 +108,24 @@ thead tr th i  {
         font-size:12px !important;
     }
 }
-
-.v-application--wrap {
-    min-height: auto !important;
+.th-chkbtn  {
+    font-size:24px !important;
+    @media screen and (max-width:1080px){
+        font-size:24px !important;
+    }
+    @media screen and (max-width:768px){
+        font-size:23px !important;
+    }
+    @media screen and (max-width:480px){
+        font-size:23px !important;
+    }
+    @media screen and (max-width:400px){
+        font-size:22px !important;
+    }
+    @media screen and (max-width:350px){
+        font-size:22px !important;
+    }
 }
-
 .the_btn{
     text-decoration: none;color: $color02 !important;float: right;line-height: 40px; 
     font-weight: bold;font-size: 13px;
@@ -133,24 +146,30 @@ thead tr th i  {
     }
 }
 
+.v-application--wrap {
+    min-height: auto !important;
+}
 .select_date{
-    border: $border04; padding:3px 8px !important;
-    .v-input__slot{margin: 0;}
+    border: $border04;
+    padding:3px 8px !important;
+    .v-input__slot{
+        margin: 0;
+        input{color: $color01;}
+    }
     .v-input__slot:before{display: none;}
     .v-input__slot:after{display: none;}
     .v-text-field__details{display: none;}
 }
-
 .detail_select_tit{
     color: #000;font-weight: bold;
     line-height: 40px;
 }
-
 .text_info{
     .v-text-field__details{display: none;}
     .v-input__slot{
         margin: 0;
         min-height: 40px !important;
-
+        .v-label{top:11px;color: $color01;}
+        fieldset{color: $color08 !important;border-radius:0px;}
     }
 }
