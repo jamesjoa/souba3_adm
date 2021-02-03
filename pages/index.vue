@@ -53,27 +53,27 @@
       <!-- 영업 그룹 선택 -->
       <v-col cols="12">
         <v-row>
-          <v-col class="pa-2" cols="12" lg="12" md="12" sm="12">
+          <v-col class="pa-2" cols="12" lg="12" md="6" sm="6">
             <v-card class="pa-2">
               <v-row>
-                <v-subheader class="con_tit font-size-md">영업그룹</v-subheader>
-                <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
+                <v-subheader>영업그룹</v-subheader>
+                <v-col cols="1" class="main_select_box">
                   <v-select 
                     v-model="sales.select" :hint="`${sales.select.team_name}`"
                     :items="sales.items" item-text="team_name" dense outlined
                     class="main_select_field"
                   ></v-select>
                 </v-col>
-                <v-subheader class="con_tit font-size-md">MKT</v-subheader>
-                <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
+                <v-subheader>MKT</v-subheader>
+                <v-col cols="1" class="main_select_box">
                   <v-select 
                     v-model="mkt.select" :hint="`${mkt.select.team_mkt}`"
                     :items="mkt.items" item-text="team_mkt" dense outlined
                     class="main_select_field"
                   ></v-select>
                 </v-col>
-                <v-subheader class="con_tit font-size-md">MD</v-subheader>
-                <v-col cols="6" lg="1" md="2" sm="3" class="main_select_box">
+                <v-subheader>MD</v-subheader>
+                <v-col cols="1" class="main_select_box">
                   <v-select 
                     v-model="md.select" :hint="`${md.select.team_md}`"
                     :items="md.items" item-text="team_md" dense outlined
@@ -547,18 +547,18 @@ export default {
       margin: 0;margin-top: 7px;
       .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
     }
-    fieldset{color: $color08 !important;border-radius: $border_radius01;}
   }
 }
 </style>
 
 <style lang="scss" scoped>
 /* 영업그룹/mkt/md */
-.con_tit{height: 72px;color:unset;
-  display: inline-block; line-height: 72px; font-weight: bold; width: 100px;
-}  
 .main_select_box{
   padding: 11px 0;margin-right:40px;
   .v-input{padding: 5px;margin: 0;}
 }
+.v-subheader{
+  font-size: 14px;font-weight: bold;height: 72px;color:unset;
+  display: inline-block; line-height: 72px;
+}  
 </style>

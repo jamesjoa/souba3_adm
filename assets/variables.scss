@@ -1,5 +1,6 @@
 /* #1 import */
-
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean');
 
 /* #2 char */
 $color01 : #ACACAC; 
@@ -10,21 +11,25 @@ $color05 : #FE8464;
 $color06 : #02AB1D; 
 $color07 : #FEBA2A; 
 $color08 : #d4d4d4; 
+$color09 : #005bea;
+
+$color-base : #fff;
+$color-out  : #000;
+$color-mask : rgba(0,0,0,0.8);
 
 $breakpoint-mobile-sm: 350px;
 $breakpoint-mobile-md: 400px;
 $breakpoint-mobile-lz: 480px;
-$breakpoint-tablet-vt: 768px; /*758*/
+$breakpoint-tablet-vt: 768px; 
 $breakpoint-tablet-hz: 1024px;
 $breakpoint-desktop: 1024px;
 
 /* #3 maxin */
-
-@mixin m{
-    @media (max-width: #{$breakpoint-tablet - 1px}) {
-      @content;
+@mixin mb{
+    @media (max-width: #{$breakpoint-tablet-vt - 1px}) {
+        @content;
     }
-  }
+}
 
 
 @mixin m-sm {
@@ -47,7 +52,7 @@ $breakpoint-desktop: 1024px;
 }
 
 @mixin tab {
-    @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @media (max-width: #{$breakpoint-tablet-hz - 1px}) {
         @content;
     }
 }
@@ -112,32 +117,35 @@ $breakpoint-desktop: 1024px;
 }
 
 
+@mixin common_setting() {
+    &ds_{
+        &none{display: none;}
+        &block{display:block}
+        &inline{display: inline-block;}
+        &line{display:inline}
+    }
+
+    &fl_{
+        &none{float:none}
+        &lt{float:left}
+        &rt{float:right}
+    }    
+
+    &ov_{
+        &hd{overflow: hidden;}
+        &at{overflow: auto;}
+    }
+}
+
 /* #4 common */
 body,html  {
-    @include user-font-maker01([14px,13px]);
-    /*
-    font-size:14px;
-    @media screen and (max-width:1080px){
-        font-size:13px;
-    }
-    @media screen and (max-width:768px){
-        font-size:13px;
-    }
-    @media screen and (max-width:480px){
-        font-size:12px;
-    }
-    @media screen and (max-width:400px){
-        font-size:12px;
-    }
-    @media screen and (max-width:350px){
-        font-size:11px;
-    }
-    */
+    font-family:'Noto Sans KR', 'Spoqa Han Sans';    
+    @include user-font-maker01([15px,14px,14px,12px,12px,11px,11px]);
 }
 
 
 .bg_gd01 {
-    background-image: linear-gradient($color03, $color04);
+    background-image: linear-gradient($color09, $color04);
 }
 
 .U_{
@@ -150,9 +158,101 @@ body,html  {
             font-weight: 700;
             line-height: 1;
         }
+        &02{
+            padding:13px 0;
+            @extend .U_btn01;
+            border: 1px solid #000
+        }
     }
 
     &ft_{
         &sz01{font-size:1.6rem}
+    }
+
+    &mg_wd_ct{margin-left:auto;margin-right:auto}
+    &mg_ht_ct{margin-top:auto;margin-bottom:auto}
+
+    &clear:after{content:"";clear:both;display:block}
+
+    &wrap{max-width:1024px}
+    &wrap2{max-width:768px}
+
+    &modal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 999;
+        vertical-align: middle;
+        display: table;
+        top:0;
+        left:0;
+
+        &_wrap {
+            display: table-cell;
+            width:100%;
+            height:100%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        &_content{
+            background:$color-base;
+            @extend .U_mg_wd_ct;
+        }
+    }
+
+    &ct_{
+        &box{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            display: table;
+        }
+
+        &wrap{
+            display: table-cell;
+            width:100%;
+            height:100%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        &contnet{
+            background:$color-base;
+            @extend .U_mg_wd_ct;
+            @extend .U_wrap; 
+        }
+    }
+    
+    &{
+        @include common_setting;
+    }
+
+}
+
+
+
+.M, .TM{
+    @include mb{
+        &_{
+            @include common_setting;
+        }
+    }
+}
+
+.TAB, .TM, .PT{
+    @include tab{
+        &_{
+            @include common_setting;
+        }
+    }
+}
+
+
+.PC, .PT {
+    @include pc{
+        &_{
+            @include common_setting;
+        }
     }
 }
