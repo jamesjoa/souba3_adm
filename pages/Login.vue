@@ -2,16 +2,18 @@
     <div class="U_login" >
         <div class="wrap">
             <v-card class="content U_clear">
-                <div class="left_con  PT_fl_lt">
-                    <div class="">
-                            ??
+                <div class="left_con">
+                    <div class="M_ds_none">
+                        <div style="width:260px;height:260px;background:rgba(255,255,255,0.3)">
+                            임시 이미지 박스
+                        </div>
+                        <span class="bg_tit">Seoulouba</span>
                     </div>
                 </div>
-                <div class="right_con PT_fl_rt">
-                    <div class="title">
-                        <v-icon>mdi-account</v-icon>
-                    </div>
-
+                <div class="right_con ">
+                    <strong class="tit">
+                        서울오빠 관리자
+                    </strong>
                     <v-card-text>
                         <v-text-field
                             label="ID"
@@ -95,8 +97,8 @@ export default {
 <style lang="scss">
 
 .U_login{
-
-    background:$color-out;
+    //@extend .U_gd_bg01;
+    background-color:$color-theme02;
     @extend .U_modal;
 
     .wrap{ 
@@ -104,30 +106,40 @@ export default {
     }
 
     .content{
-        background:  $color09;
+        //background:  $color-theme02;
+        @extend .U_gd_bg02;
         @extend .U_modal_content;
         @extend .U_wrap2;
+        @include mb{
+            width:94%
+        }
     }
 
 
 
     .U_login_content{
-        //@extend .bg_gd01;
-        background: $color09;
         padding:30px;
         max-width:400px;
         margin: 0 auto
     }
-    .title{
-        padding:30px;text-align: center;
-        .v-icon{width:80px;height:80px;border-radius: 50%;background:rgba(255,255,255,0.8);font-size:3.5rem}
+    .tit{
+        font-weight: 700;
+        padding-bottom:15px;
+        @extend .U_ft_sz01 , .U_ds_block, .U_ft_fm01;
+        letter-spacing: 0.7px
     }
+    
     .btn01{
         @extend .U_btn01;
-        @extend .U_ft_sz01;
+        @extend .U_ft_sz03;
+        @extend .U_gd_bg01;
+
+        color: $color-base;
     }
 
     .right_con{
+        @extend .PT_fl_rt;
+        padding:30px;
         width:50%;
         background:$color-base;
         @include mb{
@@ -135,8 +147,28 @@ export default {
         }
     } 
     .left_con {
-        background: $color09;
+        @extend .PT_fl_lt;
+        @extend .U_ov_hd;
         width:50%;
+        padding:30px;
+        
+        @include mb{
+            width:100%;
+            padding:0;
+            height:20px;
+        }
+        
+        .bg_tit{
+            font-size:3rem;
+            color:$color-base;
+            font-weight: 700;
+            position: absolute;
+            left:20px;
+            bottom:15px;
+            letter-spacing: 0.7px;
+            opacity: 0.4;
+            @extend .M_ds_none;          
+        }
     }
 
 

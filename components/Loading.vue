@@ -1,5 +1,5 @@
 <template>
-  <div  class="loading-page">
+  <div class="loading-page" v-if="loading" >
     <div class="loading-content">
       <div class="loading"></div>
     </div>
@@ -15,9 +15,6 @@
   }
 </script>
 <style scoped lang="scss">
-/*
-v-if="loading"
-*/
   .loading-page {
     background:$color-mask;
     @extend .U_modal;
@@ -31,7 +28,7 @@ v-if="loading"
     height: 1.5rem;
     border: 4px solid $color-base;
     border-radius: 50%;
-    border-top-color: $color09;
+    border-top-color: $color-theme01;
     animation: spin 1s ease-in-out infinite;
   }
   @keyframes spin {

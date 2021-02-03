@@ -1,5 +1,5 @@
 <template>
-  <v-app id="index">
+  <div>
     <v-row>
       <v-col cols="12" lg="6" md="12" sm="12">
         <v-row>
@@ -53,33 +53,47 @@
       <!-- 영업 그룹 선택 -->
       <v-col cols="12">
         <v-row>
-          <v-col class="pa-2" cols="12" lg="12" md="6" sm="6">
+          <v-col class="pa-2" cols="12" lg="12" md="12" sm="12">
             <v-card class="pa-2">
               <v-row>
-                <v-subheader>영업그룹</v-subheader>
-                <v-col cols="1" class="main_select_box">
+                <v-col cols="4">
                   <v-select 
-                    v-model="sales.select" :hint="`${sales.select.team_name}`"
-                    :items="sales.items" item-text="team_name" dense outlined
-                    class="main_select_field"
+                    v-model="sales.select"
+                    :items="sales.items" 
+                    :hide-details='true'
+                    item-text="team_name" 
+                    label="Standard"
+                    dense 
+                    outlined
                   ></v-select>
                 </v-col>
-                <v-subheader>MKT</v-subheader>
-                <v-col cols="1" class="main_select_box">
+                
+                <v-col cols="4">
                   <v-select 
-                    v-model="mkt.select" :hint="`${mkt.select.team_mkt}`"
-                    :items="mkt.items" item-text="team_mkt" dense outlined
-                    class="main_select_field"
+                    v-model="mkt.select"
+                    :items="mkt.items"
+                    :hide-details='true'
+                    item-text="team_mkt"
+                    dense 
+                    outlined
+                    label="Standard"
                   ></v-select>
                 </v-col>
-                <v-subheader>MD</v-subheader>
-                <v-col cols="1" class="main_select_box">
+
+                <v-col cols="4">
                   <v-select 
-                    v-model="md.select" :hint="`${md.select.team_md}`"
-                    :items="md.items" item-text="team_md" dense outlined
-                    class="main_select_field"
+                    v-model="md.select" 
+                    :items="md.items" 
+                    :hide-details='true'
+
+                    item-text="team_md" 
+                    dense 
+                    outlined
+                    label="Standard"
+
                   ></v-select>
                 </v-col>
+              
               </v-row>
             </v-card>
           </v-col>
@@ -110,7 +124,7 @@
         </v-row>
       </v-col>
     </v-row>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -534,31 +548,13 @@ export default {
 </script>
 
 <style lang="scss">
-.main_select_field{
-  .v-text-field__details{display: none;}
-}
-.main_select_box{
-  .v-input__slot:before{display: none;}
-  .v-input__slot:after{display: none;}
-  .v-input__slot{
-    margin: 0;
-    .v-select__selections{line-height: 23px;}
-    .v-input__append-inner{
-      margin: 0;margin-top: 7px;
-      .primary--text {color: rgba(0, 0, 0, 0.54) !important;}
-    }
-  }
-}
 </style>
 
 <style lang="scss" scoped>
 /* 영업그룹/mkt/md */
-.main_select_box{
-  padding: 11px 0;margin-right:40px;
-  .v-input{padding: 5px;margin: 0;}
-}
+
 .v-subheader{
-  font-size: 14px;font-weight: bold;height: 72px;color:unset;
-  display: inline-block; line-height: 72px;
+  font-weight: bold;
+  @extend .U_ft_sz05;
 }  
 </style>
