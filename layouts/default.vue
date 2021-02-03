@@ -15,6 +15,7 @@
       :mini-variant="miniVariant"
       :clipped="clipped"
       v-if="$store.state.login"
+      class="U_gnb"
       fixed
       app
     >
@@ -74,9 +75,9 @@
       :clipped-left="clipped"
       fixed
       app
+      class="U_hd"
+      height="45"
     >
-
-    
       <v-app-bar-nav-icon 
         @click.stop="drawer = !drawer"
        />
@@ -95,7 +96,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title"  />
+      <v-toolbar-title v-text="title" class="logo_tit"/>
       
       <v-spacer />
 
@@ -143,7 +144,12 @@
         <nuxt />
       </v-container>
     </v-main>
+   
+  </v-app>
+</template>
 
+<script>
+/*
     <v-footer
       style="position:fixed"
       :absolute="!fixed"
@@ -154,35 +160,10 @@
         {{$store.state.query.basePage}}
       </span>
     </v-footer>
-
-    
-  </v-app>
-</template>
-
-<script>
-import Loading  from "@/components/Loading.vue";
-import ModalList from "@/components/ModalList.vue";
-
-/*
-<v-btn
-    icon
-    @click.stop="miniVariant = !miniVariant"
-    v-if="$store.state.login"
-  >
-    <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-</v-btn>
-
-
-<v-btn
-  icon
-  @click.stop="$vuetify.theme.dark = $vuetify.theme.dark ? false : true"
->
-  <v-icon v-if="$vuetify.theme.dark">mdi-brightness-6</v-icon>
-  <v-icon v-if="!$vuetify.theme.dark">mdi-brightness-4</v-icon>
-</v-btn>
-
 */
 
+import Loading  from "@/components/Loading.vue";
+import ModalList from "@/components/ModalList.vue";
 
 export default {
   components: {
@@ -217,6 +198,7 @@ export default {
 }
 .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined){box-shadow: none;border-bottom: 1px solid #ddd;}
 
+/* gnb setting */
 .U-dep1{position:relative;width:100%}
 .U-dep2{
   .btn{position:absolute;left:185px;top:0;z-index:99;}
@@ -228,6 +210,26 @@ export default {
   .v-list{display:block}
   .btn{transform: rotate(180deg);}
 }
-
 .U-dep2 .v-list-item__content{padding-left:70px}
+
+/* hd titile */
+.logo_tit{
+  @extend .U_ft_sz04;
+  font-weight: 500;
+}
+
+/* hd gb */
+.U_hd {
+  @extend .U_gd_bg01;
+  * {color:#fff}
+}
+
+/* nav */
+.U_gnb{
+  //@extend .U_gd_bg02;
+  border: 0!important;
+  background: $color-frame!important;
+  * {color:#fff!important}
+}
+
 </style>

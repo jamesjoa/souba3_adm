@@ -1,5 +1,6 @@
 /* #1 import */
-
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean');
 
 /* #2 char */
 $color01 : #ACACAC; 
@@ -11,49 +12,72 @@ $color06 : #02AB1D;
 $color07 : #FEBA2A; 
 $color08 : #d4d4d4; 
 
-$breakpoint-mobile-sm: 350px;
-$breakpoint-mobile-md: 400px;
-$breakpoint-mobile-lz: 480px;
-$breakpoint-tablet-vt: 768px; /*758*/
-$breakpoint-tablet-hz: 1024px;
-$breakpoint-desktop: 1024px;
+
+$color-base    : #fff;
+$color-frame   : #273c4d;
+$color-out     : #000;
+$color-mask    : rgba(0,0,0,0.8);
+$color-mask2   : rgba(255,255,255,0.8);
+
+$color-theme01 : #7C54FF;
+$color-theme02 : #4D52E8; 
+$color-theme03 : #6292FF;
+$color-theme04 : #4DA4E8; 
+$color-theme05 : #54E1FF;
+
+
+$color-complementary01 : #FFEE47;
+$color-complementary02 : #9C8114; 
+$color-complementary03 : #B38720;
+$color-complementary04 : #9C6614; 
+$color-complementary05 : #FFB87A;
+
+
+    
+
+$breakpoint-mobile-sm : 320px;
+$breakpoint-mobile    : 330px;
+$breakpoint-mobile-md : 375px;
+$breakpoint-mobile-lz : 568px;
+$breakpoint-tablet-vt : 768px; 
+$breakpoint-tablet-hz : 1024px;
+$breakpoint-desktop   : 1024px;
 
 /* #3 maxin */
-
-@mixin m{
-    @media (max-width: #{$breakpoint-tablet - 1px}) {
-      @content;
+@mixin mb{
+    @media (max-width: #{$breakpoint-tablet-vt - 1px}) {
+        @content;
     }
-  }
+}
 
 
 @mixin m-sm {
-  @media (max-width: #{$breakpoint-mobile-md - 1px}) {
+  @media (max-width: #{$breakpoint-mobile - 1px}) {
     @content;
   }
 }
 
 
 @mixin m-md {
-    @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+    @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-mobile-md - 1px}) {
         @content;
     }
 }
 
 @mixin m-lz {
-    @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+    @media (min-width: #{$breakpoint-mobile-md}) and (max-width: #{$breakpoint-mobile-lz - 1px}) {
         @content;
     }
 }
 
 @mixin tab {
-    @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @media (max-width: #{$breakpoint-tablet-hz - 1px}) {
         @content;
     }
 }
 
 @mixin tab-vt {
-  @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-hz - 1px}) {
+  @media (min-width: #{$breakpoint-mobile-lz}) and (max-width: #{$breakpoint-tablet-vt - 1px}) {
     @content;
   }
 }
@@ -70,12 +94,16 @@ $breakpoint-desktop: 1024px;
   }
 }
 
-
-
 @mixin linear-gradient($direction, $color-stops...) {
     background: nth(nth($color-stops, 1), 1);
     background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
     background: linear-gradient($direction, $color-stops);
+}
+
+@mixin U_gd_ft($color1,$color2) {
+    background: linear-gradient(40deg, $color1,$color2) !important;
+    -webkit-background-clip: text !important;
+    color: transparent;
 }
 
 @mixin user-font-maker01($font-size) {
@@ -92,18 +120,14 @@ $breakpoint-desktop: 1024px;
                 font-size:$size;
             }
         } @else if($i==3){
-            @include tab-hz{
-                font-size:$size;
-            }
-        } @else if($i==4){
             @include m-lz{
                 font-size:$size;
             }
-        } @else if($i==5){
+        } @else if($i==4){
             @include m-md{
                 font-size:$size;
             }
-        } @else if($i==6){
+        } @else if($i==5){
             @include m-sm{
                 font-size:$size;
             }
@@ -112,33 +136,34 @@ $breakpoint-desktop: 1024px;
 }
 
 
+@mixin common_setting() {
+    &ds_{
+        &none{display: none;}
+        &block{display:block}
+        &inline{display: inline-block;}
+        &line{display:inline}
+    }
+
+    &fl_{
+        &none{float:none}
+        &lt{float:left}
+        &rt{float:right}
+    }    
+
+    &ov_{
+        &hd{overflow: hidden;}
+        &at{overflow: auto;}
+    }
+}
+
 /* #4 common */
 body,html  {
-    @include user-font-maker01([14px,13px]);
-    /*
-    font-size:14px;
-    @media screen and (max-width:1080px){
-        font-size:13px;
-    }
-    @media screen and (max-width:768px){
-        font-size:13px;
-    }
-    @media screen and (max-width:480px){
-        font-size:12px;
-    }
-    @media screen and (max-width:400px){
-        font-size:12px;
-    }
-    @media screen and (max-width:350px){
-        font-size:11px;
-    }
-    */
+    background: #f9f9f9;
+    $body-ft : 15px,14px,14px,12px,12px,11px;
+    font-family:'Noto Sans KR', 'Spoqa Han Sans' !important;    
+    @include user-font-maker01($body-ft);
 }
 
-
-.bg_gd01 {
-    background-image: linear-gradient($color03, $color04);
-}
 
 .U_{
     &btn{
@@ -150,9 +175,146 @@ body,html  {
             font-weight: 700;
             line-height: 1;
         }
+        &02{
+            padding:13px 0;
+            @extend .U_btn01;
+            border: 1px solid #000
+        }
     }
 
     &ft_{
-        &sz01{font-size:1.6rem}
+        &fm01{font-family: 'Noto Sans KR'!important;}
+        &fm02{font-family: 'Spoqa Han Sans'!important}
+
+        &sz01{font-size:2.0rem} /* lz-ex */
+        &sz02{font-size:1.7rem} /* lz */
+        &sz03{font-size:1.3rem} /* md-lz */
+        &sz04{font-size:1.1rem} /* md */
+        &sz05{font-size:1.0rem} /* md-sm */
+        &sz06{font-size:0.9rem} /* sm */
+        &sz07{font-size:0.8rem} /* sm-ex */
+
+        &lt{text-align: left;}
+        &rt{text-align: right;}
+        &ct{text-align: center;}
+    }
+
+    &mg_wd_ct{margin-left:auto;margin-right:auto}
+    &mg_ht_ct{margin-top:auto;margin-bottom:auto}
+
+    &clear:after{content:"";clear:both;display:block}
+
+    
+
+    &ov_{
+        &hd{overflow: hidden;}
+        &at{overflow: auto;}
+    }
+
+    &ct_{
+        &box{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            display: table;
+        }
+
+        &wrap{
+            display: table-cell;
+            width:100%;
+            height:100%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        &contnet{
+            background:$color-base;
+            @extend .U_mg_wd_ct;
+            @extend .U_wrap; 
+        }
+    }
+    
+    &hd{
+        /*
+        background-color: $color-theme01!important;
+        color:$color-base!important;
+        * {color:$color-base!important};
+        */
+    }
+
+    &gd_bg{
+        
+        &01{background-image: linear-gradient( 90deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%);}
+        &02{background-image: linear-gradient( 320deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%);}
+
+    }
+
+    &gd_ft{
+        &01{ @include U_gd_ft($color-mask2,$color-theme05) }
+    }
+
+    &wrap{max-width:1024px}
+    &wrap2{max-width:768px}
+
+    &modal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 999;
+        vertical-align: middle;
+        display: table;
+        top:0;
+        left:0;
+
+        &_wrap {
+            display: table-cell;
+            width:100%;
+            height:100%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        &_content{
+            background:$color-base;
+            @extend .U_mg_wd_ct;
+        }
+    }
+    
+    &{
+        @include common_setting;
+    }
+
+}
+
+.M, .TM{
+    @include mb{
+        &_{
+            @include common_setting;
+        }
     }
 }
+
+.TAB, .TM, .PT{
+    @include tab{
+        &_{
+            @include common_setting;
+        }
+    }
+}
+
+
+.PC, .PT {
+    @include pc{
+        &_{
+            @include common_setting;
+        }
+    }
+}
+
+
+/*override vuetify*/
+.v-application--wrap {
+    min-height: auto !important;
+}
+
+.theme--light.v-application{background:none!important}

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading" class="loading-page">
+  <div class="loading-page" v-if="loading" >
     <div class="loading-content">
       <div class="loading"></div>
     </div>
@@ -14,30 +14,21 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
   .loading-page {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background:rgba(0,0,0,0.8);
-    z-index: 999;
-    vertical-align: middle;
-    display: table;
+    background:$color-mask;
+    @extend .U_modal;
   }
   .loading-content{
-    display: table-cell;
-    width:100%;
-    height:100%;
-    vertical-align: middle;
-    text-align: center;
+    @extend .U_modal_wrap;
   }
   .loading {
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    border: 4px solid rgb(255, 255, 255);
+    border: 4px solid $color-base;
     border-radius: 50%;
-    border-top-color: rgba(98,146,255,1);
+    border-top-color: $color-theme01;
     animation: spin 1s ease-in-out infinite;
   }
   @keyframes spin {
