@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Test from './modal/Test.vue';
+import Test from '../modal/Test.vue';
 
 export default {
   props: {

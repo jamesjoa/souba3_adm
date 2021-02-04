@@ -67,7 +67,6 @@
                     outlined
                   ></v-select>
                 </v-col>
-                
                 <v-col cols="4">
                   <v-select 
                     v-model="mkt.select"
@@ -79,7 +78,6 @@
                     label="Standard"
                   ></v-select>
                 </v-col>
-
                 <v-col cols="4">
                   <v-select 
                     v-model="md.select" 
@@ -90,10 +88,8 @@
                     dense 
                     outlined
                     label="Standard"
-
                   ></v-select>
                 </v-col>
-              
               </v-row>
             </v-card>
           </v-col>
