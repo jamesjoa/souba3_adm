@@ -107,8 +107,8 @@ export default {
 
     .content{
         //background:  $color-theme02;
-        @extend .U_gd_bg02;
         @extend .U_modal_content;
+        @extend .U_gd_bg02;
         @extend .U_wrap2;
         @include mb{
             width:94%

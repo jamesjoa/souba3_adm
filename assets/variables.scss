@@ -243,10 +243,8 @@ body,html  {
     }
 
     &gd_bg{
-        
-        &01{background-image: linear-gradient( 90deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%);}
-        &02{background-image: linear-gradient( 320deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%);}
-
+        &01{background-image: linear-gradient( 90deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%)!important;}
+        &02{background-image: linear-gradient( 320deg , $color-theme01 0%, $color-theme02 25%, $color-theme03 100%)!important;}
     }
 
     &gd_ft{
