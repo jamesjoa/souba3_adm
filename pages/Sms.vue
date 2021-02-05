@@ -10,16 +10,23 @@
       {{$store.state.sms.test_sms}}
     </div>
 
-    <button type="button" @click="text_cnt()">cnt</button>
+    <v-btn  @click="text_cnt()">cnt</v-btn>
+    <v-btn  @click="$store.dispatch('TESTING')">cnt global</v-btn>
 
+    
+    <Test />
 
   </div>
 </template>
 
 <script>
-
+import Test from "@/components/Test.vue";
 export default {
+  components:{
+    Test
+  },
   methods:{
+
     text_cnt : function(){
       this.$store.dispatch('sms/test_sms_add_action')
     },  
@@ -30,7 +37,9 @@ export default {
         height:300
       })
     }
-
+  },
+  created(){
+    this.$store.commit('setTitle','SMS관리')
   }
 }
 </script>

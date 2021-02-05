@@ -1,8 +1,9 @@
 <template>
     <v-navigation-drawer
-        v-model="rightDrawer"
+        v-model="show"
         temporary
         fixed
+        :right="right"
     >
         <v-list>
             <v-list-item @click.native="/*right = !right*/">
@@ -19,8 +20,19 @@ export default {
     },
     data(){
         return{
+            right: true,  
+            show : null
         }
     },
+    watch:{
+        rightDrawer : function(){
+            this.show = this.rightDrawer
+        },
+        show : function(){
+            if(!this.show)
+                this.$emit('close',false)
+        }
+    }
 
 }
 </script>

@@ -71,7 +71,7 @@ $breakpoint-desktop   : 1024px;
 }
 
 @mixin tab {
-    @media (max-width: #{$breakpoint-tablet-hz - 1px}) {
+    @media (min-width: #{$breakpoint-tablet-hz - 1px}) {
         @content;
     }
 }

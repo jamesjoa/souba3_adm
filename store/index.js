@@ -20,11 +20,15 @@ export default {
         login : false,
         loginToken : '',
         query : {},
+        title : ''
       },
       getters:{
      
       },
       mutations: {
+        testConsole(){
+          console.log('test');
+        },
         addModalList(state, data) {
           state.modalList.push(data)
         },
@@ -76,11 +80,15 @@ export default {
         },
         setMenu(state,data){
           state.$menu = data ? data : [] 
+        },
+        setTitle(state,tit){
+          state.title = tit;
         }
       },
       actions: {
         async TESTING(sto){
-            await sto.commit('testConsole');
+            //await sto.commit('testConsole');
+            sto.commit('sms/test_sms_add')
         },
         async LOGIN(sto,data){
           await this.$axios({
@@ -149,7 +157,41 @@ export default {
           }
 
           return latest
+        },
+      
+        async SET_COOKIE(sto,data){    
+          const todayDate = new Date();
+          todayDate.setHours( 24 );
+          document.cookie = data.name+ "=" + escape( data.value ) + "; path=/; expires=" +   todayDate.toGMTString() + ";";
+        },
+
+        async GET_COOKIE(sto,data){
+          let Found = false
+          let start, end
+          let i = 0
+          
+          while(i <= document.cookie.length) {
+              start = i
+              end = start + data.name.length
+              
+              if(document.cookie.substring(start, end) == data.name) {
+                Found = true
+                break 
+              }
+              i++
+          }
+          
+          if(Found == true) {
+            start = end + 1
+            end = document.cookie.indexOf(";", start)
+            if(end < start)
+              end = document.cookie.length
+            return document.cookie.substring(start, end)
+          }
+          
+          return ""
         }
+
       },
       modules: {
 
