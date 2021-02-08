@@ -1,152 +1,71 @@
 <template>
   <v-app>
-    <v-row class="ma-0 mb-5">
-      <v-col class="pa-0 mr-3" cols="4" lg="1" md="2" sm="4">
-        <v-select 
-          v-model="search_key.select" :hint="`${search_key.select.keywords}`"
-          :items="search_key.items" item-text="keywords" dense outlined
-          class="member_select"
-        ></v-select>
-      </v-col>
-      <v-col class="pa-0 pl-2 member_search" cols="4" lg="2" md="3" sm="6" style="border-right:0px">
-        <v-text-field 
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="검색어"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-col>
-      <v-btn 
-        class="btn mr-3" type="button" :height="40" :width="40">
-        상세<v-icon>mdi-menu-down</v-icon>
-      </v-btn>
-      <v-col class="pa-0 stats" cols="4" lg="1" md="2" sm="4" >
-        <div class="tit">전체</div>
-        <div>{{total}}</div>
-      </v-col>
-      <v-col class="pa-0 stats" cols="4" lg="1" md="2" sm="4" >
-        <div class="tit">어제가입</div>
-        <div>{{join}}</div>
-      </v-col>
-      <v-col class="pa-0 stats" cols="4" lg="1" md="2" sm="4" >
-        <div class="tit">어제탈퇴</div>
-        <div>{{drop_out}}</div>
-      </v-col>
-    </v-row>
-
-    <!-- 상세설정항목 -->
-    <v-row class="ma-0 px-3 py-3">
-      <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
-        <v-row>
-          <v-col cols="12" lg="1" md="2" sm="12" class="pa-0 detail_select_tit">가입기간</v-col>
-          <v-col class="pa-0 mr-1" cols="4" lg="2" md="3" sm="3">
-            <v-select 
-              v-model="join_key.select" :hint="`${join_key.select.date_type}`"
-              :items="join_key.items" item-text="date_type" dense outlined
-              class="member_select"
-            ></v-select>
-          </v-col>
-          <v-col class="pa-0 mr-1 select_date" cols="3" lg="3" md="3" sm="3">
-            <v-menu
-              ref="start_dt" v-model="start_dt" :close-on-content-click="false" :return-value.sync="date"
-              transition="scale-transition" offset-y min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="date" readonly v-bind="attrs" v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="start_dt = false"> Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.start_dt.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-          <div class="detail_select_tit">-</div>
-          <v-col class="pa-0 px-2 ml-1 select_date" cols="3" lg="3" md="3" sm="3">
-            <v-menu
-              ref="end_dt" v-model="end_dt" :close-on-content-click="false" :return-value.sync="date"
-              transition="scale-transition" offset-y min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="date" readonly v-bind="attrs" v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="end_dt = false"> Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.end_dt.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col class="px-3 py-3" cols="12" lg="6" md="6" sm="12">
-        <v-row>
-          <v-col cols="12" lg="1" md="2" sm="12" class="pa-0 detail_select_tit">포인트</v-col>
-          <v-col class="pa-0 mr-1" cols="4" lg="2" md="3" sm="3">
-            <v-select 
-              v-model="point_key.select" :hint="`${point_key.select.point_type}`"
-              :items="point_key.items" item-text="point_type" dense outlined
-              class="member_select"
-            ></v-select>
-          </v-col>
-          <v-col class="pa-0 mr-1" cols="3" lg="3" md="3" sm="3">
-            <v-text-field
-              label="최소포인트"
-              single-line
-              outlined
-              class="text_info"
-            ></v-text-field>
-          </v-col>
-          <div class="detail_select_tit">-</div>
-          <v-col class="pa-0 px-2 ml-1" cols="3" lg="3" md="3" sm="3">
-            <v-text-field
-              label="최대포인트"
-              single-line
-              outlined
-              class="text_info"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <!-- 삭제&수정 -->
-    <v-row class="ma-0 mb-5 pt-3 pb-3" 
-      style="border-top:1px solid #ddd; border-bottom:1px solid #ddd;">
-      <v-btn style="border-right:0px"
-        class="btn" type="button" :height="40" :width="40">
-        <v-icon>mdi-trash-can-outline</v-icon>삭제
-      </v-btn>
-      <v-btn 
-        class="btn mr-3" type="button" :height="40" :width="40">
-        수정
-      </v-btn>
-      <v-btn 
-        class="btn mr-3" type="button" :height="40" :width="40">
-        <v-icon>mdi-dots-horizontal</v-icon>
-      </v-btn>
-      <v-btn style="position: absolute; right: 0;"
-        class="btn" type="button" :height="40">
-        엑셀다운
-      </v-btn>
-    </v-row>
-    
-    <!-- 회원리스트 -->
-    <div>
-      <BasicTable 
-        :item="memver_list"
-      />
-    </div>
+    <TopFixed />
+    <BasicTable />
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </v-app>
 </template>
 
 <script>
+import TopFixed from '~/components/common/TopFixed.vue';
+import BasicTable from '~/components/common/BasicTable.vue';
+
 export default {
+  computed:{
+    TopFixed,
+    BasicTable
+  },
   data: () => ({
     date: new Date().toISOString().substr(0, 10),
     start_dt: false,

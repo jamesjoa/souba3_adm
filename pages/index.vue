@@ -62,7 +62,7 @@
                     :items="sales.items" 
                     :hide-details='true'
                     item-text="team_name" 
-                    label="Standard"
+                    label="영업그룹"
                     dense 
                     outlined
                   ></v-select>
@@ -75,7 +75,7 @@
                     item-text="team_mkt"
                     dense 
                     outlined
-                    label="Standard"
+                    label="MKT"
                   ></v-select>
                 </v-col>
                 <v-col cols="4">
@@ -87,7 +87,7 @@
                     item-text="team_md" 
                     dense 
                     outlined
-                    label="Standard"
+                    label="MD"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -124,15 +124,18 @@
 </template>
 
 <script>
-import CalendarsMini from "~/components/CalenderMini.vue";
-import BoardMini from "~/components/BoardMini.vue";
-import StateMini from "~/components/StateMini.vue";
+import CalendarsMini from "~/components/index/CalenderMini.vue";
+import BoardMini from "~/components/index/BoardMini.vue";
+import StateMini from "~/components/index/StateMini.vue";
 
 export default {
   components:{
     CalendarsMini,
     BoardMini,
     StateMini
+  },
+  created(){
+    this.$store.commit('setTitle','대시보드')
   },
   data:()=>({
     //가입/탈퇴한회원수 & 대기/완료계약건수
@@ -141,11 +144,13 @@ export default {
         avatar: require('~/assets/business_icon1.png'),
         title: '어제가입한회원 &mdash; <span class="icon_umb">7</span>명',
         subtitle: `어제탈퇴한회원 &mdash; <span class="icon_umb">0</span>명`,
+        link : '',
       },
       {
         avatar: require('~/assets/business_icon2.png'),
         title: '계약승인대기 &mdash; <span class="icon_umb contract">20</span>건',
-        subtitle: `계약승인완료 &mdash; <span class="icon_umb contract">18,807</span>건`
+        subtitle: `계약승인완료 &mdash; <span class="icon_umb contract">18,807</span>건`,
+        link : '',
       }
     ],
     

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-      v-model="drawer"
+      v-model="show"
       :mini-variant="miniVariant"
       :clipped="clipped"
       v-if="$store.state.login"
@@ -69,7 +69,19 @@ export default {
     },
     data(){
         return{
-            miniVariant: false,
+            show : null,
+            miniVariant : false,
+        }
+    },
+    watch:{
+        drawer : function(){
+          this.show = this.drawer
+        },
+        show : function(){
+            if(!this.show)
+                this.$emit('close')
+            else 
+                this.$emit('show')
         }
     }
 }
